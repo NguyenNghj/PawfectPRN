@@ -133,38 +133,38 @@ namespace PawfectPRN.ViewModels
         {
             if (string.IsNullOrWhiteSpace(FullName))
             {
-                MessageBox.Show("Vui lòng nhập họ và tên.", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Please enter your full name.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             if (string.IsNullOrWhiteSpace(Email) || !ValidateEmail(Email))
             {
-                MessageBox.Show("Vui lòng nhập email hợp lệ.", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Please enter a valid email.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             if (string.IsNullOrWhiteSpace(PhoneNumber) || !ValidatePhoneNumber(PhoneNumber))
             {
-                MessageBox.Show("Vui lòng nhập số điện thoại hợp lệ (10-11 số).", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Please enter a valid phone number (10-11 digits).", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             if (string.IsNullOrWhiteSpace(Password) || Password.Length < 6)
             {
-                MessageBox.Show("Mật khẩu phải có ít nhất 6 ký tự.", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Password must be at least 6 characters long.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             if (string.IsNullOrWhiteSpace(ConfirmPassword))
             {
-                MessageBox.Show("Vui lòng xác nhận mật khẩu.", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Please confirm your password.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
             if (string.IsNullOrWhiteSpace(Gender))
             {
-                MessageBox.Show("Vui lòng chọn giới tính.", "Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Please select your gender.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             if (Password != ConfirmPassword)
             {
-                MessageBox.Show("Mật khẩu xác nhận không khớp.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Password confirmation does not match.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -172,7 +172,7 @@ namespace PawfectPRN.ViewModels
             {
                 if (context.Accounts.Any(a => a.Email == Email))
                 {
-                    MessageBox.Show("Email đã được đăng ký.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Email is already registered.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -190,8 +190,7 @@ namespace PawfectPRN.ViewModels
                 context.Accounts.Add(newUser);
                 context.SaveChanges();
 
-                MessageBox.Show("Đăng ký thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
-
+                MessageBox.Show("Registration successful!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 NavigateToLogin();
             }
         }

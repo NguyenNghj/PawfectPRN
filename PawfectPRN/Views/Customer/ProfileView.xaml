@@ -81,8 +81,8 @@
            FontSize="45" FontWeight="Bold" Foreground="#8C6E63">
             </TextBlock>
 
-            <fa:FontAwesome Icon="UserCircle" FontSize="80" Foreground="#8C6E63"
-                            HorizontalAlignment="Left" Margin="167,85,0,0" Grid.RowSpan="2" RenderTransformOrigin="3.488,0.744" Grid.ColumnSpan="2"/>
+            <fa:FontAwesome Icon="UserCircle" FontSize="80" Foreground="#8C6E63" Grid.Row="0"
+                            HorizontalAlignment="Left" Margin="104,17,0,67" Grid.RowSpan="2" RenderTransformOrigin="3.488,0.744" Grid.Column="1"/>
 
             <!-- Full Name -->
             <Grid Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center">
