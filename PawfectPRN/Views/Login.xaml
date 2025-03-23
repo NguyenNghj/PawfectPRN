@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PawfectPRN.Views"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
           WindowStartupLocation="CenterScreen"
-        Title="Login" Height="350" Width="500">
+        Title="Login" Height="350" Width="500" Background="Transparent" WindowStyle="None" AllowsTransparency="True">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -17,90 +18,111 @@
             <ColumnDefinition Width="6*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" Background="#D3A376">
-            <Image Margin="3,87,3,87" Source="/logo.png" Stretch="Fill" RenderTransformOrigin="0.688,0.748"/>
-        </Grid>
+        <Border CornerRadius="25 0 0 25" Padding="30" Background="#D3A376">
+            <Grid Grid.Column="0">
+                <Image Margin="0,94,0,94" Source="/logo.png" Stretch="Fill"/>
+            </Grid>
+        </Border>
 
-        <Grid Grid.Column="1">
+        <Border Grid.Column="1" Background="white" CornerRadius="0 25 25 0">
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="6*"/>
-            </Grid.RowDefinitions>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="6*"/>
+                </Grid.RowDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="6*"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
 
-            <!-- Title login -->
-            <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Text="LOGIN"
+                <!-- Title login -->
+                <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Text="LOGIN"
                 HorizontalAlignment="Center" VerticalAlignment="Center"
                 FontSize="26" FontWeight="Bold" Foreground="#D3A376">
-            </TextBlock>
+                </TextBlock>
 
-            <!-- Username -->
-            <TextBlock Grid.Column="1" Grid.Row="1" Text="Email:"
-                HorizontalAlignment="Left" VerticalAlignment="Center"
-                FontSize="16" FontWeight="Bold">
-            </TextBlock>
-            <Border Grid.Column="1" Grid.Row="2" Height="30" Width="150" Margin="0 0 0 20"
+                <!-- Username -->
+                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1" 
+            VerticalAlignment="Center">
+                    <fa:ImageAwesome Icon="Envelope" Width="20" Height="20" 
+                     VerticalAlignment="Center" />
+                    <TextBlock Text=" Email:" FontSize="16" FontWeight="Bold"
+               Margin="5,0,0,0" VerticalAlignment="Center" />
+                </StackPanel>
+
+                <Border Grid.Column="1" Grid.Row="2" Height="30" Width="150" Margin="0 0 0 20"
         CornerRadius="8" Background="White" BorderBrush="Gray" BorderThickness="1">
-                <TextBox Text="{Binding Username, Mode=TwoWay}" Background="Transparent" 
+                    <TextBox Text="{Binding Username, Mode=TwoWay}" Background="Transparent" 
              BorderThickness="0" Padding="5" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
-            </Border>
+                </Border>
 
 
-            <!-- Password -->
-            <TextBlock Grid.Column="1" Grid.Row="3" Text="Password:"
-           HorizontalAlignment="Left" VerticalAlignment="Center"
-           FontSize="16" FontWeight="Bold">
-            </TextBlock>
+                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3" 
+            VerticalAlignment="Center">
+                    <fa:ImageAwesome Icon="Lock" Width="20" Height="20" 
+                     VerticalAlignment="Center" />
+                    <TextBlock Text=" Password:" FontSize="16" FontWeight="Bold"
+               Margin="5,0,0,0" VerticalAlignment="Center" />
+                </StackPanel>
 
-            <Border CornerRadius="8" Background="White" BorderBrush="Gray" BorderThickness="1"
+
+                <Border CornerRadius="8" Background="White" BorderBrush="Gray" BorderThickness="1"
         Grid.Column="1" Grid.Row="4" Height="30" Width="150" Margin="0 0 0 10">
-                <TextBox Text="{Binding Password, Mode=TwoWay}" Background="Transparent" 
-             BorderThickness="0" Padding="5"
+                    <PasswordBox Name="PasswordBox" PasswordChanged="PasswordBox_PasswordChanged" 
+             Background="Transparent" BorderThickness="0" Padding="5"
              VerticalAlignment="Center" VerticalContentAlignment="Center"/>
-            </Border>
+                </Border>
 
-            <!-- Register Button -->
-            <TextBlock Grid.Column="1" Grid.Row="5" Text="Register Now"
+                <!-- Register Button -->
+                <TextBlock Grid.Column="1" Grid.Row="5" Text="Register Now"
     HorizontalAlignment="Left" VerticalAlignment="Center"
     FontSize="13" FontWeight="Bold" Foreground="#D3A376"
     Cursor="Hand" MouseDown="RegisterTextBlock_MouseDown"/>
 
 
-            <!-- Button Login -->
-            <Grid Grid.Column="1" Grid.Row="6" Margin="0 30 0 0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="14*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="11*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+                <!-- Button Login -->
+                <Grid Grid.Column="1" Grid.Row="6" Margin="0 30 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="14*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="11*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                <Button Grid.Column="0" Grid.Row="0" 
+                    <Button Grid.Column="0" Grid.Row="0" 
         Margin="42,-18,42,54" Content="Login" 
-        Background="#3E2522" Foreground="#D3A376" 
+        Background="#3E2522" Foreground="#D3A376" FontWeight="Bold"
         Command="{Binding LoginCommand}" Grid.ColumnSpan="3">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border CornerRadius="10" Background="{TemplateBinding Background}" Padding="5">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="10" Background="{TemplateBinding Background}" Padding="5">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                </Grid>
+                
+                <Button Grid.Column="2" HorizontalAlignment="Center" 
+        VerticalAlignment="Top" Margin="0,10,0,0"
+        Background="Transparent" BorderThickness="0"
+        Click="CloseButton_Click">
+                    <fa:ImageAwesome Icon="Times" Width="20" Height="20" Foreground="Red"/>
                 </Button>
+
+
             </Grid>
-        </Grid>
+        </Border>
     </Grid>
 </Window>

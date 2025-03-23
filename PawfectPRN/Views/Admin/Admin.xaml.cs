@@ -25,6 +25,7 @@ namespace PawfectPRN.Views.Admin
             MainFrame.Content = new ProductView();
         }
 
+
         private void Product_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = new ProductView();
@@ -33,6 +34,24 @@ namespace PawfectPRN.Views.Admin
         private void Category_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = new CategoryView();
+
+        private void Logout_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // Hiển thị hộp thoại xác nhận logout
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to logout?",
+                                                      "Logout Confirmation",
+                                                      MessageBoxButton.YesNo,
+                                                      MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                // Điều hướng về màn hình đăng nhập
+                Login loginWindow = new Login();
+                loginWindow.Show();
+
+                // Đóng cửa sổ hiện tại
+                this.Close();
+            }
         }
     }
 }

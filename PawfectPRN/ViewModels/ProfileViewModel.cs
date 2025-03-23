@@ -138,7 +138,7 @@ namespace PE_180897_NguyenTriNghi.ViewBaseModel
                     selectitem.Address = accountToUpdate.Address;
                     selectitem.Gender = accountToUpdate.Gender;
 
-                    MessageBox.Show("Thông tin đã được cập nhật thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Information updated successfully!", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }
@@ -149,13 +149,13 @@ namespace PE_180897_NguyenTriNghi.ViewBaseModel
 
             if (string.IsNullOrWhiteSpace(OldPassword) || string.IsNullOrWhiteSpace(NewPassword) || string.IsNullOrWhiteSpace(ConfirmNewPassword))
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Please fill in all the required fields!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             if (NewPassword != ConfirmNewPassword)
             {
-                MessageBox.Show("Mật khẩu mới và xác nhận mật khẩu không khớp!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("New password and confirmation do not match!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -167,7 +167,7 @@ namespace PE_180897_NguyenTriNghi.ViewBaseModel
                     string hashedOldPassword = HashPassword(OldPassword);
                     if (accountToChangePassword.Password != hashedOldPassword)
                     {
-                        MessageBox.Show("Mật khẩu cũ không đúng!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show("Incorrect old password!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                         return;
                     }
 
@@ -175,7 +175,7 @@ namespace PE_180897_NguyenTriNghi.ViewBaseModel
                     accountToChangePassword.Password = hashedNewPassword;
                     context.SaveChanges();
 
-                    MessageBox.Show("Mật khẩu đã được thay đổi thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Password changed successfully!", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     OldPassword = string.Empty;
                     NewPassword = string.Empty;
