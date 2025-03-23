@@ -32,22 +32,21 @@
                 </MenuItem.Template>
             </MenuItem>
 
-
-            <!-- MenuItem Phone -->
-            <MenuItem x:Name="Category" Height="75" Width="150" Foreground="#FFF2DF" FontSize="15" Click="Category_Click">
+            <MenuItem x:Name="Category" Height="75" Width="150" Foreground="#FFF2DF" Click="Category_Click">
                 <MenuItem.Header>
                     <TextBlock Text="Category" FontWeight="Bold"/>
                 </MenuItem.Header>
                 <MenuItem.Template>
                     <ControlTemplate TargetType="MenuItem">
-                        <Border CornerRadius="10" Background="#D3A376" BorderBrush="#8C6E63" BorderThickness="1" 
-                   VerticalAlignment="Center" HorizontalAlignment="Stretch" Height="45">
+                        <Border CornerRadius="5" Background="#8C6E63" BorderThickness="1" 
+              VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Height="55">
                             <ContentPresenter Content="{TemplateBinding Header}"  
-                                 VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                               VerticalAlignment="Center" HorizontalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </MenuItem.Template>
             </MenuItem>
+
         </Menu>
         <Frame Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
         <fa:ImageAwesome Icon="SignOut" Foreground="Red" Width="30" Height="30"
