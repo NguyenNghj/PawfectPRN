@@ -5,14 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:PawfectPRN.Views.Admin"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="750" d:DesignWidth="1200"
       Title="CategoryView">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"/>
-            <RowDefinition Height="7*"/>
-            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -21,9 +21,9 @@
 
         <!-- Nhóm Data list -->
         <Grid Grid.Row="1" Grid.RowSpan="2" Background="Red">
-            <DataGrid x:Name="listView_Student" ItemsSource="{Binding FlightBookings}" SelectedItem="{Binding selectitem, Mode=OneWayToSource}"
+            <DataGrid x:Name="listView_Student" ItemsSource="{Binding categories}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
             ColumnWidth="*" Margin="5"
-            RowHeight="27" FontSize="13"
+            RowHeight="27" FontSize="16"
             CanUserAddRows="False" CanUserDeleteRows="False"
             IsReadOnly="True"
             AutoGenerateColumns="False"
@@ -33,8 +33,8 @@
             BorderThickness="1"                      
 >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Width="0.3*" Binding="{Binding ID}"/>
-                    <DataGridTextColumn Header="PassengerName" Width="*" Binding="{Binding PassengerName}"/>
+                    <DataGridTextColumn Header="CategoryId" Width="0.3*" Binding="{Binding CategoryId}" FontSize="16"/>
+                    <DataGridTextColumn Header="CategoryName" Width="*" Binding="{Binding CategoryName}" FontSize="16"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
@@ -51,17 +51,20 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="ID: " FontSize="11" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"></TextBlock>
-            <TextBlock Grid.Column="1" Text="PassengerName: " FontSize="11" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Column="0" Text="CategoryId" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50 0 0 0"></TextBlock>
+            <TextBlock Grid.Column="1" Text="CategoryName" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
 
-            <TextBox Grid.Row="1" Grid.Column="0" Margin="5 0 10 5" Text="{Binding textboxitem.ID, Mode=TwoWay}" IsReadOnly="True"></TextBox>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="0 0 10 5" Text="{Binding textboxitem.PassengerName, Mode=TwoWay}"></TextBox>
+            <TextBox Grid.Row="1" Grid.Column="0" Margin="50 0 20 5" Text="{Binding TextBoxItem.CategoryId, Mode=TwoWay}" IsReadOnly="True"
+                     TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"></TextBox>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0 0 50 5" Text="{Binding TextBoxItem.CategoryName, Mode=TwoWay}"
+                     TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"></TextBox>
 
         </Grid>
 
         <!-- Nhóm Button -->
-        <Grid Grid.Row="2" Background="Green">
+        <Grid Grid.Row="2" Background="#8C6E63">
             <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
@@ -71,9 +74,15 @@
                 <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Row="0" Grid.Column="0" Content="ADD" FontSize="16" Command="{Binding AddCommand}" Margin="45 10 45 10"></Button>
-            <Button Grid.Row="0" Grid.Column="1" Content="UPDATE" FontSize="16" Command="{Binding UpdateCommand}" Margin="45 10 45 10"></Button>
-            <Button Grid.Row="0" Grid.Column="2" Content="DELETE" FontSize="16" Command="{Binding DeleteCommand}" Margin="45 10 45 10"></Button>
+
+            <Button Grid.Row="0" Grid.Column="0" Content="ADD" FontSize="18" Command="{Binding AddCommand}" Background="#188754" Foreground="White" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <Button Grid.Row="0" Grid.Column="1" Content="UPDATE" FontSize="18" Command="{Binding UpdateCommand}" Background="#fec107" Foreground="Black" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <Button Grid.Row="0" Grid.Column="2" Content="DELETE" FontSize="18" Command="{Binding DeleteCommand}" Background="#dc3546" Foreground="White" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <Button Grid.Row="1" Grid.Column="0" Content="RESET" FontSize="18" Command="{Binding ResetCommand}" Background="#0d6efd" Foreground="White" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <Button Grid.Row="1" Grid.Column="1" Content="SEARCH" FontSize="18" Command="{Binding SearchCommand}"  Foreground="Black" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="380 10 45 10" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                     TextAlignment="Left" VerticalContentAlignment="Center" FontSize="18">
+            </TextBox>
 
         </Grid>
     </Grid>

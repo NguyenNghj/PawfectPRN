@@ -24,6 +24,17 @@ namespace PawfectPRN.Views.Admin
             InitializeComponent();
             MainFrame.Content = new ProductView();
         }
+
+
+        private void Product_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new ProductView();
+        }
+
+        private void Category_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new CategoryView();
+
         private void Logout_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             // Hiển thị hộp thoại xác nhận logout

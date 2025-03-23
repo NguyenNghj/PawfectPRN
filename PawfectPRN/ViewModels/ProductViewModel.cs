@@ -11,8 +11,9 @@ using FirstCode.Helper;
 using FirstCode.ViewModels;
 using PawfectPRN.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
-namespace LorKingDom_Management_System.ViewModels
+namespace PawfectPRN.ViewModels
 {
     public class ProductViewModel : BaseViewModel
     {
@@ -24,7 +25,7 @@ namespace LorKingDom_Management_System.ViewModels
         public ICommand DeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
-
+        public ICommand ResetCommand { get; set; }
 
         public ProductViewModel()
         {
@@ -35,6 +36,7 @@ namespace LorKingDom_Management_System.ViewModels
             UpdateCommand = new RelayCommand(Update);
             SearchCommand = new RelayCommand(Search);
             DeleteCommand = new RelayCommand(Delete);
+            ResetCommand = new RelayCommand(Reset);
         }
 
         private void Delete(object obj)
@@ -64,6 +66,16 @@ namespace LorKingDom_Management_System.ViewModels
             }
         }
 
+        private void Reset(object obj)
+        {
+            TextBoxItem = new Product(); // Tạo một Product mới với các giá trị mặc định
+            SearchText = null;
+            SelectedCategory = null; // Đặt lại ComboBox
+            OnPropertyChanged(nameof(TextBoxItem)); // Thông báo giao diện cập nhật
+            OnPropertyChanged(nameof(SelectedCategory)); // Thông báo cập nhật SelectedCategory
+            LoadProducts();
+        }
+
         private void Search(object obj)
         {
             if (string.IsNullOrWhiteSpace(SearchText))
@@ -75,8 +87,8 @@ namespace LorKingDom_Management_System.ViewModels
             using (var context = new PawfectprnContext())
             {
                 var filteredProducts = context.Products
-    .Where(p => p.Name.ToLower().Contains(SearchText.ToLower()))
-    .ToList();
+                   .Where(p => p.Name.ToLower().Contains(SearchText.ToLower()))
+                   .ToList();
                 products = new ObservableCollection<Product>(filteredProducts);
                 OnPropertyChanged(nameof(products));
             }
