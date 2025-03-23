@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PawfectPRN.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,14 +20,19 @@ namespace PawfectPRN.Views.Customer
     /// </summary>
     public partial class Customer : Window
     {
-        public Customer()
+        private Account _account;
+
+        public Customer(Account account)
         {
             InitializeComponent();
+            _account = account; 
+            MainFrame.Content = new ProfileView(_account);
         }
 
         private void Profile_Click(object sender, RoutedEventArgs e)
         {
-
+            MainFrame.Content = new ProfileView(_account);
         }
     }
+
 }

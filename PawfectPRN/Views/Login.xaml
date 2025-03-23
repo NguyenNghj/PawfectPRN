@@ -100,8 +100,6 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
-
-
             </Grid>
         </Grid>
     </Grid>

@@ -70,7 +70,7 @@ namespace PawfectPRN.ViewModels
                             nextWindow = new Admin();
                             break;
                         case "customer":
-                            nextWindow = new Customer();
+                            nextWindow = new Customer(user);
                             break;
                         default:
                             MessageBox.Show("Vai trò không hợp lệ.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);

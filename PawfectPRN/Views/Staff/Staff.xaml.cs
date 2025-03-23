@@ -1,6 +1,4 @@
-﻿using PawfectPRN.Models;
-using PE_180897_NguyenTriNghi.ViewBaseModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,20 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PawfectPRN.Views.Customer
+namespace PawfectPRN.Views.Staff
 {
     /// <summary>
-    /// Interaction logic for ProfileView.xaml
+    /// Interaction logic for Staff.xaml
     /// </summary>
-    public partial class ProfileView : Page
+    public partial class Staff : Window
     {
-        public ProfileView(Account account)
+        public Staff()
         {
             InitializeComponent();
-            DataContext = new ProfileViewModel(account);
         }
     }
 }
