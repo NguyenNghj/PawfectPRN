@@ -8,6 +8,7 @@ using PawfectPRN.Models;
 using PawfectPRN.Views.Admin;
 using PawfectPRN.Views.Customer;
 using FirstCode.Helper;
+using PawfectPRN.Views.Staff;
 
 namespace PawfectPRN.ViewModels
 {
@@ -55,9 +56,15 @@ namespace PawfectPRN.ViewModels
 
         public void Login(object obj)
         {
+            if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
+            {
+                MessageBox.Show("Please enter both email and password.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             using (var context = new PawfectprnContext())
             {
-                string hashedPassword = HashPassword(_password); // Băm mật khẩu trước khi so sánh
+                string hashedPassword = HashPassword(_password); // Hash password before comparison
 
                 var user = context.Accounts.FirstOrDefault(u => u.Email == _username && u.Password == hashedPassword);
                 if (user != null)
@@ -72,8 +79,11 @@ namespace PawfectPRN.ViewModels
                         case "customer":
                             nextWindow = new Customer(user);
                             break;
+                        case "staff":
+                            nextWindow = new Staff(user);
+                            break;
                         default:
-                            MessageBox.Show("Vai trò không hợp lệ.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                            MessageBox.Show("Invalid role.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                             return;
                     }
 
@@ -82,7 +92,7 @@ namespace PawfectPRN.ViewModels
                 }
                 else
                 {
-                    MessageBox.Show("Sai email hoặc mật khẩu.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Incorrect email or password.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }

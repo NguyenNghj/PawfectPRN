@@ -15,19 +15,18 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PawfectPRN.Views.Customer
+namespace PawfectPRN.Views.Staff
 {
     /// <summary>
-    /// Interaction logic for ProfileView.xaml
+    /// Interaction logic for ProfileStaffView.xaml
     /// </summary>
-    public partial class ProfileView : Page
+    public partial class ProfileStaffView : Page
     {
-        public ProfileView(Account account)
+        public ProfileStaffView(Account account)
         {
             InitializeComponent();
             DataContext = new ProfileViewModel(account);
         }
-
         private void OldPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (DataContext is ProfileViewModel viewModel)

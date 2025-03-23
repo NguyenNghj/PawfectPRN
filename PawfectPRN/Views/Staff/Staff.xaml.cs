@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PawfectPRN.Models;
+using PawfectPRN.Views.Customer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +21,35 @@ namespace PawfectPRN.Views.Staff
     /// </summary>
     public partial class Staff : Window
     {
-        public Staff()
+        private Account _account;
+        public Staff(Account account)
         {
             InitializeComponent();
+            _account = account;
+            MainFrame.Content = new ProfileStaffView(_account);
+        }
+        private void Profile_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new ProfileStaffView(_account);
+        }
+
+        private void Logout_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // Hiển thị hộp thoại xác nhận logout
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to logout?",
+                                                      "Logout Confirmation",
+                                                      MessageBoxButton.YesNo,
+                                                      MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                // Điều hướng về màn hình đăng nhập
+                Login loginWindow = new Login();
+                loginWindow.Show();
+
+                // Đóng cửa sổ hiện tại
+                this.Close();
+            }
         }
     }
 }
