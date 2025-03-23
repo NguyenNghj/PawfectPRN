@@ -16,13 +16,21 @@ namespace PawfectPRN.ViewModels
 {
     public class RegisterViewModel : BaseViewModel
     {
+        private string CapitalizeFirstLetter(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input)) return input;
+            return string.Join(" ", input.Split(' ')
+                        .Where(word => !string.IsNullOrWhiteSpace(word))
+                        .Select(word => char.ToUpper(word[0]) + word.Substring(1).ToLower()));
+        }
+
         private string _fullName;
         public string FullName
         {
             get => _fullName;
             set
             {
-                _fullName = value;
+                _fullName = CapitalizeFirstLetter(value);
                 OnPropertyChanged();
             }
         }
@@ -55,7 +63,7 @@ namespace PawfectPRN.ViewModels
             get => _address;
             set
             {
-                _address = value;
+                _address = CapitalizeFirstLetter(value);
                 OnPropertyChanged();
             }
         }
@@ -66,7 +74,7 @@ namespace PawfectPRN.ViewModels
             get => _gender;
             set
             {
-                _gender = value;
+                _gender = CapitalizeFirstLetter(value);
                 OnPropertyChanged();
             }
         }
@@ -174,9 +182,9 @@ namespace PawfectPRN.ViewModels
                     Email = Email,
                     PhoneNumber = PhoneNumber,
                     Address = Address,
-                    Gender = Gender.ToString().ToLower(),
-                    Password = HashPassword(Password), // Hash mật khẩu 5 lần trước khi lưu
-                    RoleName = "customer" // Mặc định role là customer
+                    Gender = Gender.ToLower(),
+                    Password = HashPassword(Password),
+                    RoleName = "customer"
                 };
 
                 context.Accounts.Add(newUser);
@@ -184,21 +192,18 @@ namespace PawfectPRN.ViewModels
 
                 MessageBox.Show("Đăng ký thành công!", "Thành công", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                // Chuyển về màn hình đăng nhập
                 NavigateToLogin();
             }
         }
+
         private void NavigateToLogin()
         {
-            // Mở cửa sổ đăng nhập
             Login loginWindow = new Login();
             loginWindow.Show();
 
-            // Tìm cửa sổ hiện tại bằng cách lấy cửa sổ chính hoặc cửa sổ đang hoạt động
             Window currentWindow = Application.Current.Windows.OfType<Window>()
                                         .FirstOrDefault(w => w.DataContext == this);
 
-            // Đóng cửa sổ hiện tại
             currentWindow?.Close();
         }
     }

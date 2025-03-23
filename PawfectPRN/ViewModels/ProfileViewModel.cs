@@ -24,12 +24,26 @@ namespace PE_180897_NguyenTriNghi.ViewBaseModel
             textboxitem = account;
         }
 
+        private string CapitalizeFirstLetter(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input)) return input;
+            return string.Join(" ", input.Split(' ')
+                        .Where(word => !string.IsNullOrWhiteSpace(word))
+                        .Select(word => char.ToUpper(word[0]) + word.Substring(1).ToLower()));
+        }
+
         private Account _textboxitem;
         public Account textboxitem
         {
             get { return _textboxitem; }
             set
             {
+                if (value != null)
+                {
+                    value.FullName = CapitalizeFirstLetter(value.FullName);
+                    value.Address = CapitalizeFirstLetter(value.Address);
+                    value.Gender = CapitalizeFirstLetter(value.Gender);
+                }
                 _textboxitem = value;
                 OnPropertyChanged(nameof(textboxitem));
             }
@@ -110,11 +124,11 @@ namespace PE_180897_NguyenTriNghi.ViewBaseModel
                 var accountToUpdate = context.Accounts.Find(selectitem.AccountId);
                 if (accountToUpdate != null)
                 {
-                    accountToUpdate.FullName = textboxitem.FullName;
+                    accountToUpdate.FullName = CapitalizeFirstLetter(textboxitem.FullName);
                     accountToUpdate.Email = textboxitem.Email;
                     accountToUpdate.PhoneNumber = textboxitem.PhoneNumber;
-                    accountToUpdate.Address = textboxitem.Address;
-                    accountToUpdate.Gender = textboxitem.Gender;
+                    accountToUpdate.Address = CapitalizeFirstLetter(textboxitem.Address);
+                    accountToUpdate.Gender = CapitalizeFirstLetter(textboxitem.Gender);
 
                     context.SaveChanges();
 
@@ -150,14 +164,13 @@ namespace PE_180897_NguyenTriNghi.ViewBaseModel
                 var accountToChangePassword = context.Accounts.Find(selectitem.AccountId);
                 if (accountToChangePassword != null)
                 {
-                    string hashedOldPassword = HashPassword(OldPassword); // Băm mật khẩu cũ để kiểm tra
+                    string hashedOldPassword = HashPassword(OldPassword);
                     if (accountToChangePassword.Password != hashedOldPassword)
                     {
                         MessageBox.Show("Mật khẩu cũ không đúng!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Warning);
                         return;
                     }
 
-                    // Băm mật khẩu mới
                     string hashedNewPassword = HashPassword(NewPassword);
                     accountToChangePassword.Password = hashedNewPassword;
                     context.SaveChanges();
@@ -181,6 +194,5 @@ namespace PE_180897_NguyenTriNghi.ViewBaseModel
             }
             return hashed;
         }
-
     }
 }

@@ -11,7 +11,6 @@
     <Page.Resources>
         <Style x:Key="RoundedTextBoxStyle" TargetType="TextBox">
             <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="BorderBrush" Value="Gray"/>
             <Setter Property="Padding" Value="5"/>
             <Setter Property="Background" Value="White"/>
             <Setter Property="Template">
@@ -20,7 +19,7 @@
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="10"
+                                CornerRadius="5"
                                 Padding="{TemplateBinding Padding}">
                             <ScrollViewer x:Name="PART_ContentHost"/>
                         </Border>
@@ -65,23 +64,30 @@
 
 
 
-            <TextBlock Grid.Row="2" Text="Full Name: " FontSize="25" FontWeight="Bold" HorizontalAlignment="Right"  VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
-            <TextBlock Grid.Row="3" Text="Email: " FontSize="25" FontWeight="Bold" HorizontalAlignment="Right"  VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
-            <TextBlock Grid.Row="4" Text="Phone: " FontSize="25" FontWeight="Bold" HorizontalAlignment="Right"  VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
-            <TextBlock Grid.Row="5" Text="Address: " FontSize="25" FontWeight="Bold" HorizontalAlignment="Right"  VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
-            <TextBlock Grid.Row="6" Text="Gender: " FontSize="25" FontWeight="Bold" HorizontalAlignment="Right"  VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
+            <TextBlock Grid.Row="2" Text="Full Name " FontSize="25" FontWeight="Bold" HorizontalAlignment="Right"  VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
+            <TextBlock Grid.Row="3" Text="Email " FontSize="25" FontWeight="Bold" HorizontalAlignment="Right"  VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
+            <TextBlock Grid.Row="4" Text="Phone " FontSize="25" FontWeight="Bold" HorizontalAlignment="Right"  VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
+            <TextBlock Grid.Row="5" Text="Address " FontSize="25" FontWeight="Bold" HorizontalAlignment="Right"  VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
+            <TextBlock Grid.Row="6" Text="Gender " FontSize="25" FontWeight="Bold" HorizontalAlignment="Right"  VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
 
             <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding textboxitem.FullName, Mode=TwoWay}" 
-                     Height="45" Width="280" HorizontalAlignment="Left" Style="{StaticResource RoundedTextBoxStyle}"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding textboxitem.Email, Mode=TwoWay}" 
-                     Height="45" Width="280" HorizontalAlignment="Left" Style="{StaticResource RoundedTextBoxStyle}"/>
+                     Height="45" Width="400" HorizontalAlignment="Center" Style="{StaticResource RoundedTextBoxStyle}" />
+            
+            <TextBox Grid.Row="3" Grid.Column="1" 
+         Text="{Binding textboxitem.Email, Mode=TwoWay}" 
+         Height="45" Width="400" HorizontalAlignment="Center" 
+         Style="{StaticResource RoundedTextBoxStyle}"
+         IsReadOnly="True"/>
             <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding textboxitem.PhoneNumber, Mode=TwoWay}" 
-                     Height="45" Width="280" HorizontalAlignment="Left" Style="{StaticResource RoundedTextBoxStyle}"/>
+                     Height="45" Width="400" HorizontalAlignment="Center" Style="{StaticResource RoundedTextBoxStyle}"/>
             <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding textboxitem.Address, Mode=TwoWay}" 
-                     Height="45" Width="280" HorizontalAlignment="Left" Style="{StaticResource RoundedTextBoxStyle}"/>
-            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding textboxitem.Gender, Mode=TwoWay}" 
-                     Height="45" Width="280" HorizontalAlignment="Left" Style="{StaticResource RoundedTextBoxStyle}"/>
-            <Rectangle Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="4" Margin="66,43,0,0" Grid.Row="1" Stroke="#8C6E63" Fill="#8C6E63" VerticalAlignment="Top" Width="588" RenderTransformOrigin="0.5,0.5">
+                     Height="45" Width="400" HorizontalAlignment="Center" Style="{StaticResource RoundedTextBoxStyle}"/>
+
+            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding textboxitem.Gender, Mode=TwoWay}"
+                     Height="45" Width="400" HorizontalAlignment="Center" Style="{StaticResource RoundedTextBoxStyle}" IsReadOnly="True"/>
+           
+            
+            <Rectangle Grid.ColumnSpan="2" HorizontalAlignment="Center" Height="4" Margin="66,43,0,0" Grid.Row="1" Stroke="#8C6E63" Fill="#8C6E63" VerticalAlignment="Top" Width="588" RenderTransformOrigin="0.5,0.5">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="-1"/>
@@ -97,13 +103,13 @@
         <Grid Grid.Row="1" Grid.Column="1" Background="#FFF2DF">
             <Button
         Content="Update" 
-        Height="50" Width="250"
-        Background="#3E2522" Foreground="#D3A376" FontSize="25"
+        Height="50" Width="150"
+        Background="#D3A376" Foreground="White" FontSize="25" FontWeight="Bold"
         Command="{Binding UpdateCommand}" 
         Grid.ColumnSpan="3">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="10" Background="{TemplateBinding Background}" Padding="5">
+                        <Border CornerRadius="5" Background="{TemplateBinding Background}" Padding="5">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
@@ -130,17 +136,17 @@
      FontSize="40" FontWeight="Bold" Foreground="#FFE0B2">
             </TextBlock>
 
-            <TextBlock Grid.Row="1" Margin="60,0,0,0" Text="Old Password: " FontSize="25" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
+            <TextBlock Grid.Row="1" Margin="60,0,0,0" Text="Old Password " FontSize="25" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
 
             <TextBox Grid.Row="2" Text="{Binding OldPassword, Mode=TwoWay}" 
                Height="45" Width="280" HorizontalAlignment="Center" Style="{StaticResource RoundedTextBoxStyle}" />
             
-            <TextBlock Grid.Row="3" Margin="60,0,0,0" Text="New Password: " FontSize="25" FontWeight="Bold" HorizontalAlignment="Left"  VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
+            <TextBlock Grid.Row="3" Margin="60,0,0,0" Text="New Password " FontSize="25" FontWeight="Bold" HorizontalAlignment="Left"  VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
 
             <TextBox Grid.Row="4" Text="{Binding NewPassword, Mode=TwoWay}" 
                Height="45" Width="280" HorizontalAlignment="Center" Style="{StaticResource RoundedTextBoxStyle}"/>
             
-            <TextBlock Grid.Row="5" Margin="60,0,0,0" Text="Confirm New Password: " FontSize="25" FontWeight="Bold" HorizontalAlignment="Left"  VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
+            <TextBlock Grid.Row="5" Margin="60,0,0,0" Text="Confirm New Password " FontSize="25" FontWeight="Bold" HorizontalAlignment="Left"  VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
 
             <TextBox  Grid.Row="6" Text="{Binding ConfirmNewPassword, Mode=TwoWay}" 
                Height="45" Width="280" HorizontalAlignment="Center" Style="{StaticResource RoundedTextBoxStyle}"/>
@@ -151,12 +157,12 @@
             <Button
        Content="Change Password" 
        Height="50" Width="250"
-       Background="#3E2522" Foreground="#D3A376" FontSize="25"
+       Background="#D3A376" Foreground="White" FontSize="25" FontWeight="Bold"
        Command="{Binding ChangePasswordCommand}" 
        Grid.ColumnSpan="3">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="10" Background="{TemplateBinding Background}" Padding="5">
+                        <Border CornerRadius="5" Background="{TemplateBinding Background}" Padding="5">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
