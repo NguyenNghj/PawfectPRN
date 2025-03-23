@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace PawfectPRN.Models;
 
@@ -14,6 +16,17 @@ public partial class PawfectprnContext : DbContext
         : base(options)
     {
     }
+
+    private string GetConnectionString()
+    {
+        IConfiguration configuration = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", true, true)
+            .Build();
+        var connectionstring = configuration["ConnectionStrings:DefaultConnection"];
+        return connectionstring;
+    }
+
 
     public virtual DbSet<Account> Accounts { get; set; }
 

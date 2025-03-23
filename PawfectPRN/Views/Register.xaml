@@ -1,0 +1,118 @@
+﻿<Window x:Class="PawfectPRN.Views.Register"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PawfectPRN.Views"
+        mc:Ignorable="d"
+        Title="Register" Height="550" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="6*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0" Background="#D3A376"/>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="6*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Title Register -->
+            <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Text="REGISTER"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       FontSize="26" FontWeight="Bold" Foreground="#D3A376">
+            </TextBlock>
+
+            <!-- Full Name -->
+            <TextBlock Grid.Column="1" Grid.Row="1" Text="Full Name:"
+                       HorizontalAlignment="Left" VerticalAlignment="Center"
+                       FontSize="16" FontWeight="Bold">
+            </TextBlock>
+            <Border Grid.Column="1" Grid.Row="2" Height="30" Width="250" Margin="0 0 0 20"
+                    CornerRadius="8" Background="White" BorderBrush="Gray" BorderThickness="1">
+                <TextBox Text="{Binding FullName, Mode=TwoWay}" Background="Transparent" 
+                         BorderThickness="0" Padding="5" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+            </Border>
+
+            <!-- Email -->
+            <TextBlock Grid.Column="1" Grid.Row="3" Text="Email:"
+                       HorizontalAlignment="Left" VerticalAlignment="Center"
+                       FontSize="16" FontWeight="Bold">
+            </TextBlock>
+            <Border Grid.Column="1" Grid.Row="4" Height="30" Width="250" Margin="0 0 0 20"
+                    CornerRadius="8" Background="White" BorderBrush="Gray" BorderThickness="1">
+                <TextBox Text="{Binding Email, Mode=TwoWay}" Background="Transparent" 
+                         BorderThickness="0" Padding="5" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+            </Border>
+
+            <!-- Password -->
+            <TextBlock Grid.Column="1" Grid.Row="5" Text="Password:"
+                       HorizontalAlignment="Left" VerticalAlignment="Center"
+                       FontSize="16" FontWeight="Bold">
+            </TextBlock>
+            <Border Grid.Column="1" Grid.Row="6" Height="30" Width="250" Margin="0 0 0 20"
+                    CornerRadius="8" Background="White" BorderBrush="Gray" BorderThickness="1">
+                <TextBox Text="{Binding Password, Mode=TwoWay}" Background="Transparent" 
+                         BorderThickness="0" Padding="5" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+            </Border>
+
+            <!-- Confirm Password -->
+            <TextBlock Grid.Column="1" Grid.Row="7" Text="Confirm Password:"
+                       HorizontalAlignment="Left" VerticalAlignment="Center"
+                       FontSize="16" FontWeight="Bold">
+            </TextBlock>
+            <Border Grid.Column="1" Grid.Row="8" Height="30" Width="250" Margin="0 0 0 20"
+                    CornerRadius="8" Background="White" BorderBrush="Gray" BorderThickness="1">
+                <TextBox Text="{Binding ConfirmPassword, Mode=TwoWay}" Background="Transparent" 
+                         BorderThickness="0" Padding="5" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+            </Border>
+
+            <!-- Button Register -->
+            <Grid Grid.Column="1" Grid.Row="9" Margin="0 30 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="14*"/>
+                    <ColumnDefinition Width="20*"/>
+                    <ColumnDefinition Width="11*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Column="0" Grid.Row="9" 
+                Margin="42,-18,42,54" Content="Register" 
+                Background="#3E2522" Foreground="#D3A376" 
+                Command="{Binding Register}" Grid.ColumnSpan="3">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="10" Background="{TemplateBinding Background}" Padding="5"
+                                    Height="40">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
