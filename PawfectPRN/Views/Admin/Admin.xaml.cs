@@ -34,6 +34,7 @@ namespace PawfectPRN.Views.Admin
         private void Category_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = new CategoryView();
+        }
 
         private void Logout_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
