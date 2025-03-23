@@ -25,5 +25,11 @@ namespace PawfectPRN.Views
             InitializeComponent();
             DataContext = new RegisterViewModel();
         }
+        public void LoginTextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Login loginWindow = new Login();
+            loginWindow.Show();
+            this.Close(); ;
+        }
     }
 }

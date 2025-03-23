@@ -1,0 +1,64 @@
+﻿<Page x:Class="PawfectPRN.Views.Customer.ProfileView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PawfectPRN.Views.Customer"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ProfileView">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="6*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="1" Background="#FFF2DF">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="7*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="7*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Text="PROFILE"
+            HorizontalAlignment="Center" VerticalAlignment="Center"
+            FontSize="26" FontWeight="Bold" Foreground="#D3A376">
+            </TextBlock>
+
+            <TextBlock Grid.Row="1" Text="ID: " FontSize="15" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
+            <TextBlock Grid.Row="2" Text="Full Name: " FontSize="15" FontWeight="Bold" HorizontalAlignment="Right"  VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
+            <TextBlock Grid.Row="3" Text="Password: " FontSize="15" FontWeight="Bold" HorizontalAlignment="Right"  VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
+            <TextBlock Grid.Row="4" Text="Email: " FontSize="15" FontWeight="Bold" HorizontalAlignment="Right"  VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
+            <TextBlock Grid.Row="5" Text="Phone: " FontSize="15" FontWeight="Bold" HorizontalAlignment="Right"  VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
+            <TextBlock Grid.Row="6" Text="Gender: " FontSize="15" FontWeight="Bold" HorizontalAlignment="Right"  VerticalAlignment="Center" Foreground="#D3A376"></TextBlock>
+
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding textboxitem.AccountId, Mode=TwoWay}" Height="25" Width="250" HorizontalAlignment="Left"></TextBox>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding textboxitem.FullName, Mode=TwoWay}" Height="25" Width="250" HorizontalAlignment="Left"></TextBox>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding textboxitem.Email, Mode=TwoWay}" Height="25" Width="250" HorizontalAlignment="Left"></TextBox>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding textboxitem.PhoneNumber, Mode=TwoWay}" Height="25" Width="250" HorizontalAlignment="Left"></TextBox>
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding textboxitem.Gender, Mode=TwoWay}" Height="25" Width="250" HorizontalAlignment="Left"></TextBox>
+            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding textboxitem.Address, Mode=TwoWay}" Height="25" Width="250" HorizontalAlignment="Left"></TextBox>
+
+        </Grid>
+
+
+        <Grid Grid.Row="0" Grid.Column="0" Background="#8C6E63">
+
+        </Grid>
+    </Grid>
+</Page>

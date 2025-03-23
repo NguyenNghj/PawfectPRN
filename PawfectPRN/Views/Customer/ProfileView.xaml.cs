@@ -10,23 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PawfectPRN.Views.Customer
 {
     /// <summary>
-    /// Interaction logic for Customer.xaml
+    /// Interaction logic for ProfileView.xaml
     /// </summary>
-    public partial class Customer : Window
+    public partial class ProfileView : Page
     {
-        public Customer()
+        public ProfileView()
         {
             InitializeComponent();
-        }
-
-        private void Profile_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

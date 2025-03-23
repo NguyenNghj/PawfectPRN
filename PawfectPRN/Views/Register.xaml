@@ -38,6 +38,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="6*"/>
             </Grid.RowDefinitions>
 
@@ -134,14 +135,14 @@
             </Border>
 
             <!-- Login Button -->
-            <TextBlock Grid.Column="1" Grid.Row="5" Text="Login"
+            <TextBlock Grid.Column="1" Grid.Row="15" Text="Login Now"
     HorizontalAlignment="Left" VerticalAlignment="Center"
     FontSize="13" FontWeight="Bold" Foreground="#D3A376"
     Cursor="Hand" MouseDown="LoginTextBlock_MouseDown"/>
 
 
             <!-- Button Register -->
-            <Grid Grid.Column="1" Grid.Row="15" Margin="0 30 0 0">
+            <Grid Grid.Column="1" Grid.Row="16" Margin="0 30 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="14*"/>
                     <ColumnDefinition Width="20*"/>
