@@ -1,0 +1,80 @@
+﻿<Page x:Class="PawfectPRN.Views.Admin.CategoryView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PawfectPRN.Views.Admin"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CategoryView">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="1.5*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Nhóm Data list -->
+        <Grid Grid.Row="1" Grid.RowSpan="2" Background="Red">
+            <DataGrid x:Name="listView_Student" ItemsSource="{Binding FlightBookings}" SelectedItem="{Binding selectitem, Mode=OneWayToSource}"
+            ColumnWidth="*" Margin="5"
+            RowHeight="27" FontSize="13"
+            CanUserAddRows="False" CanUserDeleteRows="False"
+            IsReadOnly="True"
+            AutoGenerateColumns="False"
+            SelectionMode="Single"
+            AlternatingRowBackground="LightGray"
+            GridLinesVisibility="Horizontal"
+            BorderThickness="1"                      
+>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Width="0.3*" Binding="{Binding ID}"/>
+                    <DataGridTextColumn Header="PassengerName" Width="*" Binding="{Binding PassengerName}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <!-- Nhóm Input Fields-->
+        <Grid Grid.Row="0" Grid.Column="0" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="ID: " FontSize="11" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"></TextBlock>
+            <TextBlock Grid.Column="1" Text="PassengerName: " FontSize="11" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+
+            <TextBox Grid.Row="1" Grid.Column="0" Margin="5 0 10 5" Text="{Binding textboxitem.ID, Mode=TwoWay}" IsReadOnly="True"></TextBox>
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0 0 10 5" Text="{Binding textboxitem.PassengerName, Mode=TwoWay}"></TextBox>
+
+        </Grid>
+
+        <!-- Nhóm Button -->
+        <Grid Grid.Row="2" Background="Green">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0" Content="ADD" FontSize="16" Command="{Binding AddCommand}" Margin="45 10 45 10"></Button>
+            <Button Grid.Row="0" Grid.Column="1" Content="UPDATE" FontSize="16" Command="{Binding UpdateCommand}" Margin="45 10 45 10"></Button>
+            <Button Grid.Row="0" Grid.Column="2" Content="DELETE" FontSize="16" Command="{Binding DeleteCommand}" Margin="45 10 45 10"></Button>
+
+        </Grid>
+    </Grid>
+</Page>

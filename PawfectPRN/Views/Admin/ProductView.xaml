@@ -21,8 +21,12 @@
 
         <!-- Nhóm Data list -->
         <Grid Grid.Row="1" Grid.RowSpan="2" Background="Red">
-            <DataGrid x:Name="listView_Student" ItemsSource="{Binding FlightBookings}" SelectedItem="{Binding selectitem, Mode=OneWayToSource}"
-            ColumnWidth="*" Margin="5"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="39*"/>
+                <ColumnDefinition Width="361*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid x:Name="listView_Student" ItemsSource="{Binding products}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+            ColumnWidth="*" Margin="5,5,5,4"
             RowHeight="27" FontSize="13"
             CanUserAddRows="False" CanUserDeleteRows="False"
             IsReadOnly="True"
@@ -30,15 +34,15 @@
             SelectionMode="Single"
             AlternatingRowBackground="LightGray"
             GridLinesVisibility="Horizontal"
-            BorderThickness="1"                      
+            BorderThickness="1" Grid.ColumnSpan="2"                      
 >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Width="0.3*" Binding="{Binding ID}"/>
-                    <DataGridTextColumn Header="PassengerName" Width="*" Binding="{Binding PassengerName}"/>
-                    <DataGridTextColumn Header="FlightNumber" Width="*" Binding="{Binding FlightNumber}"/>
-                    <DataGridTextColumn Header="Departure" Width="*" Binding="{Binding Departure}"/>
-                    <DataGridTextColumn Header="Destination" Width="*" Binding="{Binding Destination}"/>
-                    <DataGridTextColumn Header="DepartureDate" Width="*" Binding="{Binding DepartureDate}"/>
+                    <DataGridTextColumn Header="ProductId" Width="Auto" Binding="{Binding ProductId}"/>
+                    <DataGridTextColumn Header="CategoryName" Width="Auto" Binding="{Binding CategoryName}"/>
+                    <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Description" Width="*" Binding="{Binding Description}"/>
+                    <DataGridTextColumn Header="Price" Width="*" Binding="{Binding Price}"/>
+                    <DataGridTextColumn Header="StockQuantity" Width="*" Binding="{Binding StockQuantity}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
@@ -51,7 +55,7 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.4*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -59,20 +63,27 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="ID: " FontSize="11" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"></TextBlock>
-            <TextBlock Grid.Column="1" Text="PassengerName: " FontSize="11" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Grid.Column="2" Text="FlightNumber: " FontSize="11" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Grid.Column="3" Text="Departure: " FontSize="11" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Grid.Column="4" Text="Destination: " FontSize="11" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Grid.Column="5" Text="DepartureDate: " FontSize="11" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Column="0" Text="ProductId" FontSize="11" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"></TextBlock>
+            <TextBlock Grid.Column="1" Text="CategoryName" FontSize="11" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Column="2" Text="Name" FontSize="11" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Column="3" Text="Description" FontSize="11" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Column="4" Text="Price" FontSize="11" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Column="5" Text="StockQuantity" FontSize="11" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
 
 
-            <TextBox Grid.Row="1" Grid.Column="0" Margin="5 0 10 5" Text="{Binding textboxitem.ID, Mode=TwoWay}" IsReadOnly="True"></TextBox>
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="0 0 10 5" Text="{Binding textboxitem.PassengerName, Mode=TwoWay}"></TextBox>
-            <TextBox Grid.Row="1" Grid.Column="2" Margin="0 0 10 5" Text="{Binding textboxitem.FlightNumber, Mode=TwoWay}"></TextBox>
-            <TextBox Grid.Row="1" Grid.Column="3" Margin="0 0 10 5" Text="{Binding textboxitem.Departure, Mode=TwoWay}"></TextBox>
-            <TextBox Grid.Row="1" Grid.Column="4" Margin="0 0 10 5" Text="{Binding textboxitem.Destination, Mode=TwoWay}"></TextBox>
-            <TextBox Grid.Row="1" Grid.Column="5" Margin="0 0 10 5" Text="{Binding textboxitem.DepartureDate, Mode=TwoWay}"></TextBox>
+            <TextBox Grid.Row="1" Grid.Column="0" Margin="5 0 10 5" Text="{Binding TextBoxItem.ProductId, Mode=TwoWay}" IsReadOnly="True"></TextBox>
+            <!-- Thay thế TextBox CategoryId bằng ComboBox này -->
+            <ComboBox Grid.Row="1" Grid.Column="1" Margin="0 0 10 5" 
+                 ItemsSource="{Binding categories}" 
+                 DisplayMemberPath="CategoryName"
+                 SelectedValuePath="CategoryId" 
+                 SelectedValue="{Binding TextBoxItem.CategoryId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
+            </ComboBox>
+            <TextBox Grid.Row="1" Grid.Column="2" Margin="0 0 10 5" Text="{Binding TextBoxItem.Name, Mode=TwoWay}"></TextBox>
+            <TextBox Grid.Row="1" Grid.Column="3" Margin="0 0 10 5" Text="{Binding TextBoxItem.Description, Mode=TwoWay}"></TextBox>
+            <TextBox Grid.Row="1" Grid.Column="4" Margin="0 0 10 5" Text="{Binding TextBoxItem.Price, Mode=TwoWay}"></TextBox>
+            <TextBox Grid.Row="1" Grid.Column="5" Margin="0 0 10 5" Text="{Binding TextBoxItem.StockQuantity, Mode=TwoWay}"></TextBox>
         </Grid>
 
         <!-- Nhóm Button -->

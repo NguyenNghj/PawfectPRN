@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LorKingDom_Management_System.ViewModels;
+using PawfectPRN.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,7 @@ namespace PawfectPRN.Views.Admin
         public ProductView()
         {
             InitializeComponent();
+            this.DataContext = new ProductViewModel();
         }
     }
 }

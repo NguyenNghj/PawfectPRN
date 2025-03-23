@@ -10,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PawfectPRN.Views.Admin
 {
     /// <summary>
-    /// Interaction logic for Admin.xaml
+    /// Interaction logic for CategoryView.xaml
     /// </summary>
-    public partial class Admin : Window
+    public partial class CategoryView : Page
     {
-        public Admin()
+        public CategoryView()
         {
             InitializeComponent();
-            MainFrame.Content = new ProductView();
         }
     }
 }
