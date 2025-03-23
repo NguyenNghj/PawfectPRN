@@ -17,9 +17,9 @@
         <!-- Header -->
         <Menu Grid.Row="0" Background="#8C6E63" VerticalAlignment="Center" FontSize="15">
             <!-- MenuItem Profile -->
-            <MenuItem x:Name="Profile" Height="75" Width="150" Foreground="#FFF2DF" Click="Profile_Click">
+            <MenuItem x:Name="Product" Height="75" Width="150" Foreground="#FFF2DF" Click="Product_Click">
                 <MenuItem.Header>
-                    <TextBlock Text="Profile" FontWeight="Bold"/>
+                    <TextBlock Text="Product" FontWeight="Bold"/>
                 </MenuItem.Header>
                 <MenuItem.Template>
                     <ControlTemplate TargetType="MenuItem">
@@ -34,9 +34,9 @@
 
 
             <!-- MenuItem Phone -->
-            <MenuItem x:Name="Phone" Height="75" Width="150" Foreground="#FFF2DF" FontSize="15">
+            <MenuItem x:Name="Category" Height="75" Width="150" Foreground="#FFF2DF" FontSize="15" Click="Category_Click">
                 <MenuItem.Header>
-                    <TextBlock Text="Phone" FontWeight="Bold"/>
+                    <TextBlock Text="Category" FontWeight="Bold"/>
                 </MenuItem.Header>
                 <MenuItem.Template>
                     <ControlTemplate TargetType="MenuItem">

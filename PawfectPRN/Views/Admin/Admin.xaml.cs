@@ -24,5 +24,15 @@ namespace PawfectPRN.Views.Admin
             InitializeComponent();
             MainFrame.Content = new ProductView();
         }
+
+        private void Product_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new ProductView();
+        }
+
+        private void Category_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new CategoryView();
+        }
     }
 }

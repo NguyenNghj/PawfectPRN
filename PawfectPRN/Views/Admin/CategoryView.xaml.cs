@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PawfectPRN.ViewModels;
 
 namespace PawfectPRN.Views.Admin
 {
@@ -23,6 +24,7 @@ namespace PawfectPRN.Views.Admin
         public CategoryView()
         {
             InitializeComponent();
+            this.DataContext = new CategoryViewModel();
         }
     }
 }
