@@ -64,6 +64,10 @@ public partial class PawfectprnContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("email");
+            entity.Property(e => e.Gender)
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasColumnName("gender");
             entity.Property(e => e.FullName)
                 .HasMaxLength(100)
                 .HasColumnName("full_name");

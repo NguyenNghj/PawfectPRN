@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PawfectPRN.Views"
         mc:Ignorable="d"
-        Title="Register" Height="550" Width="800">
+         WindowStartupLocation="CenterScreen"
+        Title="Register" Height="850" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -16,11 +17,19 @@
             <ColumnDefinition Width="6*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" Background="#D3A376"/>
+        <Grid Grid.Column="0" Background="#D3A376">
+            <Image Margin="44,227,44,417" Source="/logo.png" Stretch="Fill"/>
+        </Grid>
 
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="4*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -88,8 +97,51 @@
                          BorderThickness="0" Padding="5" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
             </Border>
 
+            <!-- Phone Number -->
+            <TextBlock Grid.Column="1" Grid.Row="9" Text="Phone Number:"
+                    HorizontalAlignment="Left" VerticalAlignment="Center"
+                    FontSize="16" FontWeight="Bold">
+            </TextBlock>
+            <Border Grid.Column="1" Grid.Row="10" Height="30" Width="250" Margin="0 0 0 20"
+                 CornerRadius="8" Background="White" BorderBrush="Gray" BorderThickness="1">
+                <TextBox Text="{Binding PhoneNumber, Mode=TwoWay}" Background="Transparent" 
+                      BorderThickness="0" Padding="5" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+            </Border>
+
+            <!-- Address -->
+            <TextBlock Grid.Column="1" Grid.Row="11" Text="Address:"
+                    HorizontalAlignment="Left" VerticalAlignment="Center"
+                    FontSize="16" FontWeight="Bold">
+            </TextBlock>
+            <Border Grid.Column="1" Grid.Row="12" Height="30" Width="250" Margin="0 0 0 20"
+                 CornerRadius="8" Background="White" BorderBrush="Gray" BorderThickness="1">
+                <TextBox Text="{Binding Address, Mode=TwoWay}" Background="Transparent" 
+                      BorderThickness="0" Padding="5" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+            </Border>
+
+            <!-- Gender -->
+            <TextBlock Grid.Column="1" Grid.Row="13" Text="Gender:"
+           HorizontalAlignment="Left" VerticalAlignment="Center"
+           FontSize="16" FontWeight="Bold"/>
+
+            <Border Grid.Column="1" Grid.Row="14" Height="30" Width="250" Margin="0 0 0 20"
+        CornerRadius="8" Background="White" BorderBrush="Gray" BorderThickness="1">
+                <ComboBox SelectedValue="{Binding Gender, Mode=TwoWay}" SelectedValuePath="Content">
+                    <ComboBoxItem Content="Male"/>
+                    <ComboBoxItem Content="Female"/>
+                    <ComboBoxItem Content="Other"/>
+                </ComboBox>
+            </Border>
+
+            <!-- Login Button -->
+            <TextBlock Grid.Column="1" Grid.Row="5" Text="Login"
+    HorizontalAlignment="Left" VerticalAlignment="Center"
+    FontSize="13" FontWeight="Bold" Foreground="#D3A376"
+    Cursor="Hand" MouseDown="LoginTextBlock_MouseDown"/>
+
+
             <!-- Button Register -->
-            <Grid Grid.Column="1" Grid.Row="9" Margin="0 30 0 0">
+            <Grid Grid.Column="1" Grid.Row="15" Margin="0 30 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="14*"/>
                     <ColumnDefinition Width="20*"/>
@@ -102,7 +154,7 @@
                 <Button Grid.Column="0" Grid.Row="9" 
                 Margin="42,-18,42,54" Content="Register" 
                 Background="#3E2522" Foreground="#D3A376" 
-                Command="{Binding Register}" Grid.ColumnSpan="3">
+                Command="{Binding RegisterCommand}" Grid.ColumnSpan="3">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border CornerRadius="10" Background="{TemplateBinding Background}" Padding="5"

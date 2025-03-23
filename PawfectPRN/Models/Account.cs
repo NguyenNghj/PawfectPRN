@@ -15,6 +15,7 @@ public partial class Account
 
     public string? Address { get; set; }
 
+    public string? Gender { get; set; }
     public string? RoleName { get; set; }
 
     public string Password { get; set; } = null!;

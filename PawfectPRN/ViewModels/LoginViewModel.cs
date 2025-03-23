@@ -1,15 +1,13 @@
 ﻿using FirstCode.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using System.Windows;
+using System.Windows.Input;
 using PawfectPRN.Models;
-using FirstCode.Helper;
 using PawfectPRN.Views.Admin;
 using PawfectPRN.Views.Customer;
+using FirstCode.Helper;
 
 namespace PawfectPRN.ViewModels
 {
@@ -37,64 +35,6 @@ namespace PawfectPRN.ViewModels
             }
         }
 
-        //public void Login(object obj)
-        //{
-        //    //if (_username == "admin" && _password == "123")
-        //    //{
-        //    //    var adminView = new Admin();
-        //    //    adminView.Show();
-
-        //    //    Application.Current.Windows[0]?.Close();
-        //    //    return;
-        //    //}
-        //    using (var context = new PawfectprnContext())
-        //    {
-        //        var user = context.Accounts.FirstOrDefault(u => u.Email == _username && u.Password == _password);
-        //        if (user != null)
-        //        {
-        //            var mainWindow = new MainWindow();
-        //            mainWindow.Show();
-        //            Application.Current.Windows[0]?.Close();
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("Invalid username or password.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        //        }
-        //    }
-        //}
-
-        public void Login(object obj)
-        {
-            using (var context = new PawfectprnContext())
-            {
-                var user = context.Accounts.FirstOrDefault(u => u.Email == _username && u.Password == _password);
-                if (user != null)
-                {
-                    Window nextWindow;
-
-                    switch (user.RoleName.ToLower())
-                    {
-                        case "admin":
-                            nextWindow = new Admin(); // Cửa sổ dành cho Admin
-                            break;
-                        case "customer":
-                            nextWindow = new Customer(); // Cửa sổ dành cho User
-                            break;
-                        default:
-                            MessageBox.Show("Role không hợp lệ.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                            return;
-                    }
-
-                    nextWindow.Show();
-                    Application.Current.Windows[0]?.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Invalid username or password.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-        }
-
         public ICommand LoginCommand { get; set; }
 
         public LoginViewModel()
@@ -102,5 +42,56 @@ namespace PawfectPRN.ViewModels
             LoginCommand = new RelayCommand(Login);
         }
 
+        private string HashPassword(string password)
+        {
+            string hashed = password;
+            for (int i = 0; i < 5; i++)
+            {
+                byte[] bytes = Encoding.UTF8.GetBytes(hashed);
+                hashed = Convert.ToBase64String(bytes);
+            }
+            return hashed;
+        }
+
+        public void Login(object obj)
+        {
+            using (var context = new PawfectprnContext())
+            {
+                string hashedPassword = HashPassword(_password); // Băm mật khẩu trước khi so sánh
+
+                var user = context.Accounts.FirstOrDefault(u => u.Email == _username && u.Password == hashedPassword);
+                if (user != null)
+                {
+                    Window nextWindow;
+
+                    switch (user.RoleName.ToLower())
+                    {
+                        case "admin":
+                            nextWindow = new Admin();
+                            break;
+                        case "customer":
+                            nextWindow = new Customer();
+                            break;
+                        default:
+                            MessageBox.Show("Vai trò không hợp lệ.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                    }
+
+                    nextWindow.Show();
+                    CloseCurrentWindow();
+                }
+                else
+                {
+                    MessageBox.Show("Sai email hoặc mật khẩu.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void CloseCurrentWindow()
+        {
+            Window currentWindow = Application.Current.Windows.OfType<Window>()
+                                      .FirstOrDefault(w => w.DataContext == this);
+            currentWindow?.Close();
+        }
     }
 }

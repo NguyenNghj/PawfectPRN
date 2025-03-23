@@ -47,7 +47,7 @@
 
             <!-- Username -->
             <TextBlock Grid.Column="1" Grid.Row="1" Text="Email:"
-                HorizontalAlignment="Center" VerticalAlignment="Center"
+                HorizontalAlignment="Left" VerticalAlignment="Center"
                 FontSize="16" FontWeight="Bold">
             </TextBlock>
             <Border Grid.Column="1" Grid.Row="2" Height="30" Width="150" Margin="0 0 0 20"
@@ -59,7 +59,7 @@
 
             <!-- Password -->
             <TextBlock Grid.Column="1" Grid.Row="3" Text="Password:"
-           HorizontalAlignment="Center" VerticalAlignment="Center"
+           HorizontalAlignment="Left" VerticalAlignment="Center"
            FontSize="16" FontWeight="Bold">
             </TextBlock>
 
@@ -71,9 +71,9 @@
             </Border>
 
             <!-- Register Button -->
-            <TextBlock Grid.Column="1" Grid.Row="5" Text="Register"
+            <TextBlock Grid.Column="1" Grid.Row="5" Text="Register Now"
     HorizontalAlignment="Left" VerticalAlignment="Center"
-    FontSize="10" FontWeight="Bold" Foreground="#D3A376"
+    FontSize="13" FontWeight="Bold" Foreground="#D3A376"
     Cursor="Hand" MouseDown="RegisterTextBlock_MouseDown"/>
 
 
