@@ -37,11 +37,11 @@ public partial class PawfectPrnContext : DbContext
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.AccountId).HasName("PK__accounts__46A222CD3F4DFC76");
+            entity.HasKey(e => e.AccountId).HasName("PK__accounts__46A222CDD43B5B87");
 
             entity.ToTable("accounts");
 
-            entity.HasIndex(e => e.Email, "UQ__accounts__AB6E6164B2FE1614").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__accounts__AB6E61643274AE8A").IsUnique();
 
             entity.Property(e => e.AccountId).HasColumnName("account_id");
             entity.Property(e => e.Address)
@@ -72,11 +72,11 @@ public partial class PawfectPrnContext : DbContext
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.CategoryId).HasName("PK__categori__D54EE9B4A5F13E27");
+            entity.HasKey(e => e.CategoryId).HasName("PK__categori__D54EE9B4019F2818");
 
             entity.ToTable("categories");
 
-            entity.HasIndex(e => e.CategoryName, "UQ__categori__5189E25572709416").IsUnique();
+            entity.HasIndex(e => e.CategoryName, "UQ__categori__5189E2554DC3E08F").IsUnique();
 
             entity.Property(e => e.CategoryId).HasColumnName("category_id");
             entity.Property(e => e.CategoryName)
@@ -86,7 +86,7 @@ public partial class PawfectPrnContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__orders__465962291D2C290E");
+            entity.HasKey(e => e.OrderId).HasName("PK__orders__46596229726E9AEC");
 
             entity.ToTable("orders");
 
@@ -112,7 +112,7 @@ public partial class PawfectPrnContext : DbContext
 
         modelBuilder.Entity<OrderDetail>(entity =>
         {
-            entity.HasKey(e => e.OrderDetailId).HasName("PK__order_de__3C5A40802EB74849");
+            entity.HasKey(e => e.OrderDetailId).HasName("PK__order_de__3C5A4080C754720B");
 
             entity.ToTable("order_details");
 
@@ -137,7 +137,7 @@ public partial class PawfectPrnContext : DbContext
 
         modelBuilder.Entity<PetHotel>(entity =>
         {
-            entity.HasKey(e => e.PethotelId).HasName("PK__pet_hote__3256CE5D83B653BA");
+            entity.HasKey(e => e.PethotelId).HasName("PK__pet_hote__3256CE5DC03EC6F9");
 
             entity.ToTable("pet_hotels");
 
@@ -158,7 +158,7 @@ public partial class PawfectPrnContext : DbContext
 
         modelBuilder.Entity<PethotelBooking>(entity =>
         {
-            entity.HasKey(e => e.BookingId).HasName("PK__pethotel__5DE3A5B10A74A007");
+            entity.HasKey(e => e.BookingId).HasName("PK__pethotel__5DE3A5B16B233E52");
 
             entity.ToTable("pethotel_bookings");
 
@@ -168,6 +168,9 @@ public partial class PawfectPrnContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("booking_date");
+            entity.Property(e => e.CheckoutDate)
+                .HasColumnType("datetime")
+                .HasColumnName("checkout_date");
             entity.Property(e => e.PethotelId).HasColumnName("pethotel_id");
             entity.Property(e => e.ServiceDetails).HasColumnName("service_details");
             entity.Property(e => e.Status)
@@ -188,7 +191,7 @@ public partial class PawfectPrnContext : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__products__47027DF5547DAFD1");
+            entity.HasKey(e => e.ProductId).HasName("PK__products__47027DF5C3B9333B");
 
             entity.ToTable("products");
 
