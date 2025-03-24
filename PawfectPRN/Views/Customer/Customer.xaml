@@ -32,7 +32,7 @@
                 </MenuItem.Template>
             </MenuItem>
 
-            <MenuItem x:Name="Booking" Height="77" Width="200" Foreground="#FFF2DF">
+            <MenuItem x:Name="Booking" Height="77" Width="200" Foreground="#FFF2DF" Click="Booking_Click">
                 <MenuItem.Header>
                     <TextBlock Text="Booking" FontWeight="Bold"/>
                 </MenuItem.Header>

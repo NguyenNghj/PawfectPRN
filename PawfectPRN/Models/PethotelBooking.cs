@@ -19,6 +19,8 @@ public partial class PethotelBooking
 
     public string Status { get; set; } = null!;
 
+    public decimal? Price { get; set; }
+
     public virtual Account Account { get; set; } = null!;
 
     public virtual PetHotel Pethotel { get; set; } = null!;

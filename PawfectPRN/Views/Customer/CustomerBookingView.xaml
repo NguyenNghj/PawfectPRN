@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="1200"
       Title="CustomerBookingView">
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"/>
@@ -24,24 +24,22 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="39*"/>
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="listView_Student" ItemsSource="{Binding products}" SelectedItem="{Binding selecteditem, Mode=TwoWay}"
-            ColumnWidth="*" Margin="5,5,5,4"
-            RowHeight="27" FontSize="16"
-            CanUserAddRows="False" CanUserDeleteRows="False"
-            IsReadOnly="True"
-            AutoGenerateColumns="False"
-            SelectionMode="Single"
-            AlternatingRowBackground="LightGray"
-            GridLinesVisibility="Horizontal"
-            BorderThickness="1"                      
->
+            <DataGrid x:Name="listView_Student" ItemsSource="{Binding PethotelBookings}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                      ColumnWidth="*" Margin="5,5,5,4"
+                      RowHeight="27" FontSize="16"
+                      CanUserAddRows="False" CanUserDeleteRows="False"
+                      IsReadOnly="True"
+                      AutoGenerateColumns="False"
+                      SelectionMode="Single"
+                      AlternatingRowBackground="LightGray"
+                      GridLinesVisibility="Horizontal"
+                      BorderThickness="1">
                 <DataGrid.Columns>
-                    <DataGridTextColumn FontSize="16" Header="BookingId" Width="Auto" Binding="{Binding BookingId}"/>
-                    <DataGridTextColumn FontSize="16" Header="PethotelId" Width="0.8*" Binding="{Binding PethotelId}"/>
-                    <DataGridTextColumn FontSize="16" Header="PethotelId" Width="0.8*" Binding="{Binding PethotelId}"/>
-                    <DataGridTextColumn FontSize="16" Header="BookingDate" Width="*" Binding="{Binding BookingDate}"/>
-                    <DataGridTextColumn FontSize="16" Header="ServiceDetails" Width="0.4*" Binding="{Binding ServiceDetails}"/>
-                    <DataGridTextColumn FontSize="16" Header="Status" Width="Auto" Binding="{Binding Status}"/>
+                    <DataGridTextColumn FontSize="16" Header="Pethotel Name" Width="0.8*" Binding="{Binding Pethotel.PethotelName}"/>
+                    <DataGridTextColumn FontSize="16" Header="Booking Date" Width="0.8*" Binding="{Binding BookingDate}"/>
+                    <DataGridTextColumn FontSize="16" Header="Checkout Date" Width="0.8*" Binding="{Binding CheckoutDate}"/>
+                    <DataGridTextColumn FontSize="16" Header="Service Details" Width="*" Binding="{Binding ServiceDetails}"/>
+                    <DataGridTextColumn FontSize="16" Header="Status" Width="0.4*" Binding="{Binding Status}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
@@ -54,40 +52,42 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.3*" />
                 <ColumnDefinition Width="0.7*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="0.5*" />
-                <ColumnDefinition Width="0.35*" />
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.5*" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="ProductId" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"></TextBlock>
-            <TextBlock Grid.Column="1" Text="CategoryName" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Grid.Column="2" Text="Name" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Grid.Column="3" Text="Description" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Column="0" Text="Pet Room Name" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"></TextBlock>
+            <TextBlock Grid.Column="1" Text="Booking Date" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Column="2" Text="Checkout Date" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Column="3" Text="ServiceDetails" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
             <TextBlock Grid.Column="4" Text="Price" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Grid.Column="5" Text="StockQuantity" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
 
-
-            <TextBox Grid.Row="1" Grid.Column="0" Margin="5 0 10 5" Text="{Binding textboxitem.ProductId, Mode=TwoWay}" IsReadOnly="True"
-                     TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"></TextBox>
-            <!-- Thay thế TextBox CategoryId bằng ComboBox này -->
-            <ComboBox Grid.Row="1" Grid.Column="1" Margin="0 0 10 5" VerticalContentAlignment="Center" FontSize="14"
-                 ItemsSource="{Binding categories}" 
-                 DisplayMemberPath="CategoryName"
-                 SelectedValuePath="CategoryId" 
-                 SelectedValue="{Binding textboxitem.CategoryId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                 SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
+            <!-- ComboBox to select Pet Hotel -->
+            <ComboBox Grid.Row="1" Grid.Column="0" Margin="0 0 10 5" VerticalContentAlignment="Center" FontSize="14"
+          ItemsSource="{Binding Pethotels}" 
+          DisplayMemberPath="pethotelName"
+          SelectedValuePath="PethotelId" 
+          SelectedValue="{Binding TextboxItem.PethotelId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          SelectedItem="{Binding SelectedPethotel, Mode=TwoWay}">
             </ComboBox>
-            <TextBox Grid.Row="1" Grid.Column="2" Margin="0 0 10 5" Text="{Binding textboxitem.Name, Mode=TwoWay}"
+
+
+            <!-- Textboxes for Booking and Checkout Dates, ServiceDetails, and Price -->
+            <TextBox Grid.Row="1" Grid.Column="1" Margin="0 0 10 5" Text="{Binding TextboxItem.BookingDate, Mode=TwoWay}"
                      TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"></TextBox>
-            <TextBox Grid.Row="1" Grid.Column="3" Margin="0 0 10 5" Text="{Binding textboxitem.Description, Mode=TwoWay}"
+
+            <TextBox Grid.Row="1" Grid.Column="2" Margin="0 0 10 5" Text="{Binding TextboxItem.CheckoutDate, Mode=TwoWay}"
                      TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"></TextBox>
-            <TextBox Grid.Row="1" Grid.Column="4" Margin="0 0 10 5" Text="{Binding textboxitem.Price, Mode=TwoWay}"
+
+            <TextBox Grid.Row="1" Grid.Column="3" Margin="0 0 10 5" Text="{Binding TextboxItem.ServiceDetails, Mode=TwoWay}"
                      TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"></TextBox>
-            <TextBox Grid.Row="1" Grid.Column="5" Margin="0 0 10 5" Text="{Binding textboxitem.StockQuantity, Mode=TwoWay}"
+
+            <TextBox Grid.Row="1" Grid.Column="4" Margin="0 0 10 5" Text="{Binding TextboxItem.Price, Mode=TwoWay}"
                      TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"></TextBox>
+
         </Grid>
 
         <!-- Nhóm Button -->

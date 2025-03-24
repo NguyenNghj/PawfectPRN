@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PawfectPRN.Models;
+using PawfectPRN.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,10 @@ namespace PawfectPRN.Views.Customer
     /// </summary>
     public partial class CustomerBookingView : Page
     {
-        public CustomerBookingView()
+        public CustomerBookingView(Account account)
         {
             InitializeComponent();
+            DataContext = new CustomerBookingViewModel(account);
         }
     }
 }
