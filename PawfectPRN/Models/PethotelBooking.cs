@@ -13,7 +13,7 @@ public partial class PethotelBooking
 
     public DateTime? BookingDate { get; set; }
 
-    public DateTime CheckoutDate { get; set; }
+    public DateTime? CheckoutDate { get; set; }
 
     public string? ServiceDetails { get; set; }
 

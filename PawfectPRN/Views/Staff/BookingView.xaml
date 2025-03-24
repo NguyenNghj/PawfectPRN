@@ -1,0 +1,130 @@
+﻿<Page x:Class="PawfectPRN.Views.Staff.BookingView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PawfectPRN.Views.Staff"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="1200"
+      Title="BookingView">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.9*"/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="2.5*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Background="White">
+            <TextBlock Text="Management Booking" FontSize="32" FontWeight="Bold"
+               HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        </Grid>
+
+        <!-- Nhóm Data list -->
+        <Grid Grid.Row="2" Grid.RowSpan="2" Background="Red">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="39*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid x:Name="listView_Student" ItemsSource="{Binding bookings}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                        ColumnWidth="*" Margin="5,5,5,4"
+                        RowHeight="27" FontSize="16"
+                        CanUserAddRows="False" CanUserDeleteRows="False"
+                        IsReadOnly="True"
+                        AutoGenerateColumns="False"
+                        SelectionMode="Single"
+                        AlternatingRowBackground="LightGray"
+                        GridLinesVisibility="Horizontal"
+                        BorderThickness="1"                      
+>
+                <DataGrid.Columns>
+                    <DataGridTextColumn FontSize="16" Header="BookingId" Width="Auto" Binding="{Binding BookingId}"/>
+                    <DataGridTextColumn FontSize="16" Header="FullName" Width="Auto" Binding="{Binding Account.FullName}"/>
+                    <DataGridTextColumn FontSize="16" Header="PethotelName" Width="0.8*" Binding="{Binding Pethotel.PethotelName}"/>
+                    <DataGridTextColumn FontSize="16" Header="BookingDate" Width="*" Binding="{Binding BookingDate, StringFormat=dd/MM/yyyy}"/>
+                    <DataGridTextColumn FontSize="16" Header="CheckoutDate" Width="0.4*" Binding="{Binding CheckoutDate, StringFormat=dd/MM/yyyy}"/>
+                    <DataGridTextColumn FontSize="16" Header="ServiceDetails" Width="Auto" Binding="{Binding ServiceDetails}"/>
+                    <DataGridTextColumn FontSize="16" Header="Status" Width="Auto" Binding="{Binding Status}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <!-- Nhóm Input Fields-->
+        <Grid Grid.Row="1" Grid.Column="0" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.3*" />
+                <ColumnDefinition Width="0.7*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="0.5*" />
+                <ColumnDefinition Width="0.35*" />
+                <ColumnDefinition Width="0.35*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="BookingId" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 0 0 0"></TextBlock>
+            <TextBlock Grid.Column="1" Text="FullName" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Column="2" Text="PethotelName" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Column="3" Text="BookingDate" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Column="4" Text="CheckoutDate" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Column="5" Text="ServiceDetails" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Column="6" Text="Status" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+
+            <TextBox Grid.Row="1" Grid.Column="0" Margin="5 0 10 5" Text="{Binding TextBoxItem.BookingId, Mode=TwoWay}" IsReadOnly="True"
+                     TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"/>
+            <ComboBox Grid.Row="1" Grid.Column="1" Margin="0 0 10 5" VerticalContentAlignment="Center" FontSize="14"
+                      ItemsSource="{Binding accounts}" 
+                      DisplayMemberPath="FullName"
+                      SelectedValuePath="AccountId" 
+                      SelectedValue="{Binding TextBoxItem.AccountId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedAccount, Mode=TwoWay}"/>
+            <ComboBox Grid.Row="1" Grid.Column="2" Margin="0 0 10 5" VerticalContentAlignment="Center" FontSize="14"
+                      ItemsSource="{Binding petHotels}" 
+                      DisplayMemberPath="PethotelName"
+                      SelectedValuePath="PethotelId" 
+                      SelectedValue="{Binding TextBoxItem.PethotelId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedPetHotel, Mode=TwoWay}"/>
+            <DatePicker Grid.Row="1" Grid.Column="3" Margin="0 0 10 5" VerticalContentAlignment="Center" 
+                        SelectedDate="{Binding TextBoxItem.BookingDate, Mode=TwoWay}"/>
+            <DatePicker Grid.Row="1" Grid.Column="4" Margin="0 0 10 5" VerticalContentAlignment="Center" 
+                        SelectedDate="{Binding TextBoxItem.CheckoutDate, Mode=TwoWay}"/>
+            <TextBox Grid.Row="1" Grid.Column="5" Margin="0 0 10 5" Text="{Binding TextBoxItem.ServiceDetails, Mode=TwoWay}"
+                     TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"/>
+            <ComboBox Grid.Row="1" Grid.Column="6" Margin="0 0 10 5" VerticalContentAlignment="Center" FontSize="14"
+                      ItemsSource="{Binding statuses}" 
+                      SelectedItem="{Binding TextBoxItem.Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+        </Grid>
+
+        <!-- Nhóm Button -->
+        <Grid Grid.Row="3" Grid.RowSpan="1" Background="#8C6E63">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0" Content="ADD" FontSize="18" Command="{Binding AddCommand}" Background="#188754" Foreground="White" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <Button Grid.Row="0" Grid.Column="1" Content="UPDATE" FontSize="18" Command="{Binding UpdateCommand}" Background="#fec107" Foreground="Black" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <Button Grid.Row="0" Grid.Column="2" Content="DELETE" FontSize="18" Command="{Binding DeleteCommand}" Background="#dc3546" Foreground="White" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <Button Grid.Row="1" Grid.Column="0" Content="RESET" FontSize="18" Command="{Binding ResetCommand}" Background="#0d6efd" Foreground="White" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <Button Grid.Row="1" Grid.Column="1" Content="SEARCH" FontSize="18" Command="{Binding SearchCommand}"  Foreground="Black" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="380 10 45 10" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                    TextAlignment="Left" VerticalContentAlignment="Center" FontSize="18">
+            </TextBox>
+        </Grid>
+    </Grid>
+</Page>

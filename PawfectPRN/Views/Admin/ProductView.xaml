@@ -43,7 +43,7 @@
 >
                 <DataGrid.Columns>
                     <DataGridTextColumn FontSize="16" Header="ProductId" Width="Auto" Binding="{Binding ProductId}"/>
-                    <DataGridTextColumn FontSize="16" Header="CategoryName" Width="Auto" Binding="{Binding CategoryName}"/>
+                    <DataGridTextColumn FontSize="16" Header="CategoryName" Width="Auto" Binding="{Binding Category.CategoryName}"/>
                     <DataGridTextColumn FontSize="16" Header="Name" Width="0.8*" Binding="{Binding Name}"/>
                     <DataGridTextColumn FontSize="16" Header="Description" Width="*" Binding="{Binding Description}"/>
                     <DataGridTextColumn FontSize="16" Header="Price" Width="0.4*" Binding="{Binding Price, StringFormat=N0, ConverterCulture='vi-VN'}"/>
