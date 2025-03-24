@@ -102,7 +102,7 @@ namespace PE_180897_NguyenTriNghi.ViewBaseModel
         {
             if (Account != null)
             {
-                using (var context = new PawfectprnContext())
+                using (var context = new PawfectPrnContext())
                 {
                     var accountFromDb = context.Accounts.FirstOrDefault(a => a.AccountId == Account.AccountId);
                     if (accountFromDb != null)
@@ -119,7 +119,7 @@ namespace PE_180897_NguyenTriNghi.ViewBaseModel
         {
             if (selectitem == null) return;
 
-            using (var context = new PawfectprnContext())
+            using (var context = new PawfectPrnContext())
             {
                 var accountToUpdate = context.Accounts.Find(selectitem.AccountId);
                 if (accountToUpdate != null)
@@ -159,7 +159,7 @@ namespace PE_180897_NguyenTriNghi.ViewBaseModel
                 return;
             }
 
-            using (var context = new PawfectprnContext())
+            using (var context = new PawfectPrnContext())
             {
                 var accountToChangePassword = context.Accounts.Find(selectitem.AccountId);
                 if (accountToChangePassword != null)

@@ -47,8 +47,6 @@
             </Setter>
         </Style>
     </Page.Resources>
-
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="8*"/>
@@ -166,6 +164,7 @@
             <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding textboxitem.Gender, Mode=TwoWay}"
     Height="45" Width="400" HorizontalAlignment="Center" 
     Style="{StaticResource RoundedTextBoxStyle}" IsReadOnly="True" CharacterCasing="Upper" FontSize="16"/>
+
             <Rectangle Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="4" Stroke="#8C6E63" Fill="#8C6E63" VerticalAlignment="Top" Width="720" RenderTransformOrigin="0.5,0.5">
                 <Rectangle.RenderTransform>
                     <TransformGroup>
@@ -176,8 +175,6 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
-
-
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="1" Background="#FFF2DF">
