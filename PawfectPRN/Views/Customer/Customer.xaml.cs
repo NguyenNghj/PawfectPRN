@@ -51,6 +51,11 @@ namespace PawfectPRN.Views.Customer
                 this.Close();
             }
         }
+
+        private void Booking_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new CustomerBookingView(_account);
+        }
     }
 
 }
