@@ -7,8 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="750" d:DesignWidth="1200"
       Title="CustomerBookingView">
-
-
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"/>
@@ -25,7 +24,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="39*"/>
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="listView_Student" ItemsSource="{Binding products}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+            <DataGrid x:Name="listView_Student" ItemsSource="{Binding products}" SelectedItem="{Binding selecteditem, Mode=TwoWay}"
             ColumnWidth="*" Margin="5,5,5,4"
             RowHeight="27" FontSize="16"
             CanUserAddRows="False" CanUserDeleteRows="False"
@@ -38,6 +37,7 @@
 >
                 <DataGrid.Columns>
                     <DataGridTextColumn FontSize="16" Header="BookingId" Width="Auto" Binding="{Binding BookingId}"/>
+                    <DataGridTextColumn FontSize="16" Header="PethotelId" Width="0.8*" Binding="{Binding PethotelId}"/>
                     <DataGridTextColumn FontSize="16" Header="PethotelId" Width="0.8*" Binding="{Binding PethotelId}"/>
                     <DataGridTextColumn FontSize="16" Header="BookingDate" Width="*" Binding="{Binding BookingDate}"/>
                     <DataGridTextColumn FontSize="16" Header="ServiceDetails" Width="0.4*" Binding="{Binding ServiceDetails}"/>
@@ -70,23 +70,23 @@
             <TextBlock Grid.Column="5" Text="StockQuantity" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
 
 
-            <TextBox Grid.Row="1" Grid.Column="0" Margin="5 0 10 5" Text="{Binding TextBoxItem.ProductId, Mode=TwoWay}" IsReadOnly="True"
+            <TextBox Grid.Row="1" Grid.Column="0" Margin="5 0 10 5" Text="{Binding textboxitem.ProductId, Mode=TwoWay}" IsReadOnly="True"
                      TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"></TextBox>
             <!-- Thay thế TextBox CategoryId bằng ComboBox này -->
             <ComboBox Grid.Row="1" Grid.Column="1" Margin="0 0 10 5" VerticalContentAlignment="Center" FontSize="14"
                  ItemsSource="{Binding categories}" 
                  DisplayMemberPath="CategoryName"
                  SelectedValuePath="CategoryId" 
-                 SelectedValue="{Binding TextBoxItem.CategoryId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 SelectedValue="{Binding textboxitem.CategoryId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
             </ComboBox>
-            <TextBox Grid.Row="1" Grid.Column="2" Margin="0 0 10 5" Text="{Binding TextBoxItem.Name, Mode=TwoWay}"
+            <TextBox Grid.Row="1" Grid.Column="2" Margin="0 0 10 5" Text="{Binding textboxitem.Name, Mode=TwoWay}"
                      TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"></TextBox>
-            <TextBox Grid.Row="1" Grid.Column="3" Margin="0 0 10 5" Text="{Binding TextBoxItem.Description, Mode=TwoWay}"
+            <TextBox Grid.Row="1" Grid.Column="3" Margin="0 0 10 5" Text="{Binding textboxitem.Description, Mode=TwoWay}"
                      TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"></TextBox>
-            <TextBox Grid.Row="1" Grid.Column="4" Margin="0 0 10 5" Text="{Binding TextBoxItem.Price, Mode=TwoWay}"
+            <TextBox Grid.Row="1" Grid.Column="4" Margin="0 0 10 5" Text="{Binding textboxitem.Price, Mode=TwoWay}"
                      TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"></TextBox>
-            <TextBox Grid.Row="1" Grid.Column="5" Margin="0 0 10 5" Text="{Binding TextBoxItem.StockQuantity, Mode=TwoWay}"
+            <TextBox Grid.Row="1" Grid.Column="5" Margin="0 0 10 5" Text="{Binding textboxitem.StockQuantity, Mode=TwoWay}"
                      TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"></TextBox>
         </Grid>
 

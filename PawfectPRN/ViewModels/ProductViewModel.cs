@@ -104,7 +104,7 @@ namespace PawfectPRN.ViewModels
             }
 
             // Validation sử dụng ProductValidator từ namespace mới
-            using (var context = new PawfectprnContext())
+            using (var context = new PawfectPrnContext())
             {
                 if (!ProductValidator.ValidateProduct(TextBoxItem, out string errorMessage, context))
                 {
@@ -152,7 +152,7 @@ namespace PawfectPRN.ViewModels
                 }
 
                 // Validation sử dụng ProductValidator từ namespace mới
-                using (var context = new PawfectprnContext())
+                using (var context = new PawfectPrnContext())
                 {
                     if (!ProductValidator.ValidateProduct(TextBoxItem, out string errorMessage, context))
                     {

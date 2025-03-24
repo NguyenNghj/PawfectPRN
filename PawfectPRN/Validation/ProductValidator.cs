@@ -11,7 +11,7 @@ namespace PawfectPRN.Validation
     public static class ProductValidator
     {
         // Validation cho Product
-        public static bool ValidateProduct(Product product, out string errorMessage, PawfectprnContext context = null)
+        public static bool ValidateProduct(Product product, out string errorMessage, PawfectPrnContext context = null)
         {
             errorMessage = string.Empty;
 
