@@ -61,7 +61,7 @@ namespace PawfectPRN.ViewModels
                 return;
             }
 
-            using (var context = new PawfectprnContext())
+            using (var context = new PawfectPrnContext())
             {
                 string hashedPassword = HashPassword(_password); // Hash password before comparison
 

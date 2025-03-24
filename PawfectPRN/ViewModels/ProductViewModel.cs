@@ -52,7 +52,7 @@ namespace PawfectPRN.ViewModels
 
             if (result == MessageBoxResult.Yes)
             {
-                using (var context = new PawfectprnContext())
+                using (var context = new PawfectPrnContext())
                 {
                     var product = context.Products.FirstOrDefault(p => p.ProductId == SelectedItem.ProductId);
                     if (product != null)
@@ -84,7 +84,7 @@ namespace PawfectPRN.ViewModels
                 return;
             }
 
-            using (var context = new PawfectprnContext())
+            using (var context = new PawfectPrnContext())
             {
                 var filteredProducts = context.Products
                    .Where(p => p.Name.ToLower().Contains(SearchText.ToLower()))
@@ -102,7 +102,7 @@ namespace PawfectPRN.ViewModels
             }
 
 
-            using (var context = new PawfectprnContext())
+            using (var context = new PawfectPrnContext())
             {
                 if (TextBoxItem.CategoryId == 0 || !context.Categories.Any(c => c.CategoryId == TextBoxItem.CategoryId))
                 {
@@ -142,7 +142,7 @@ namespace PawfectPRN.ViewModels
                     return;
                 }
 
-                using (var context = new PawfectprnContext())
+                using (var context = new PawfectPrnContext())
                 {
                     var existingProduct = context.Products.FirstOrDefault(p => p.ProductId == SelectedItem.ProductId);
                     if (existingProduct != null)
@@ -178,7 +178,7 @@ namespace PawfectPRN.ViewModels
         }
         private void LoadProducts()
         {
-            using (var context = new PawfectprnContext())
+            using (var context = new PawfectPrnContext())
             {
                 var productList = context.Products
                     .Include(p => p.Category) // Tải dữ liệu từ bảng Categories
@@ -190,7 +190,7 @@ namespace PawfectPRN.ViewModels
 
         private void LoadCategory()
         {
-            using (var context = new PawfectprnContext())
+            using (var context = new PawfectPrnContext())
             {
                 categories = new ObservableCollection<Category>(context.Categories.ToList());
                 OnPropertyChanged(nameof(categories));
