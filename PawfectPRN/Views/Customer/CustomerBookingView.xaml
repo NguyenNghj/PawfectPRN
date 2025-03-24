@@ -36,8 +36,9 @@
                       BorderThickness="1">
                 <DataGrid.Columns>
                     <DataGridTextColumn FontSize="16" Header="Pethotel Name" Width="0.8*" Binding="{Binding Pethotel.PethotelName}"/>
-                    <DataGridTextColumn FontSize="16" Header="Booking Date" Width="0.8*" Binding="{Binding BookingDate}"/>
-                    <DataGridTextColumn FontSize="16" Header="Checkout Date" Width="0.8*" Binding="{Binding CheckoutDate}"/>
+                    <DataGridTextColumn FontSize="16" Header="Pethotel Price" Width="0.4*" Binding="{Binding Pethotel.Price}"/>
+                    <DataGridTextColumn FontSize="16" Header="Booking Date" Width="0.8*" Binding="{Binding BookingDate, StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
+                    <DataGridTextColumn FontSize="16" Header="Checkout Date" Width="0.8*" Binding="{Binding CheckoutDate, StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
                     <DataGridTextColumn FontSize="16" Header="Service Details" Width="*" Binding="{Binding ServiceDetails}"/>
                     <DataGridTextColumn FontSize="16" Header="Status" Width="0.4*" Binding="{Binding Status}"/>
                 </DataGrid.Columns>
@@ -67,27 +68,50 @@
 
             <!-- ComboBox to select Pet Hotel -->
             <ComboBox Grid.Row="1" Grid.Column="0" Margin="0 0 10 5" VerticalContentAlignment="Center" FontSize="14"
-          ItemsSource="{Binding Pethotels}" 
-          DisplayMemberPath="pethotelName"
-          SelectedValuePath="PethotelId" 
-          SelectedValue="{Binding TextboxItem.PethotelId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-          SelectedItem="{Binding SelectedPethotel, Mode=TwoWay}">
+                      ItemsSource="{Binding Pethotels}"
+                      DisplayMemberPath="PethotelName"
+                      SelectedValuePath="PethotelId"
+                      SelectedValue="{Binding TextboxItem.PethotelId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             </ComboBox>
 
+            <!-- DatePicker và TextBox cho Booking Date -->
+            <Grid Grid.Row="1" Grid.Column="1" Margin="0 0 10 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <DatePicker Grid.Column="0" 
+                            SelectedDate="{Binding TextboxItem.BookingDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            VerticalContentAlignment="Center" FontSize="14"/>
+                <TextBox Grid.Column="1" Margin="5 0 0 0"
+                         Text="{Binding TextboxItem.BookingDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='HH:mm:ss'}"
+                         VerticalContentAlignment="Center" FontSize="14"/>
+            </Grid>
 
-            <!-- Textboxes for Booking and Checkout Dates, ServiceDetails, and Price -->
-            <TextBox Grid.Row="1" Grid.Column="1" Margin="0 0 10 5" Text="{Binding TextboxItem.BookingDate, Mode=TwoWay}"
+            <!-- DatePicker và TextBox cho Checkout Date -->
+            <Grid Grid.Row="1" Grid.Column="2" Margin="0 0 10 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <DatePicker Grid.Column="0" 
+                            SelectedDate="{Binding TextboxItem.CheckoutDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            VerticalContentAlignment="Center" FontSize="14"/>
+                <TextBox Grid.Column="1" Margin="5 0 0 0"
+                         Text="{Binding TextboxItem.CheckoutDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='HH:mm:ss'}"
+                         VerticalContentAlignment="Center" FontSize="14"/>
+            </Grid>
+
+            <TextBox Grid.Row="1" Grid.Column="3" Margin="0 0 10 5" 
+                     Text="{Binding TextboxItem.ServiceDetails, Mode=TwoWay}"
                      TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"></TextBox>
 
-            <TextBox Grid.Row="1" Grid.Column="2" Margin="0 0 10 5" Text="{Binding TextboxItem.CheckoutDate, Mode=TwoWay}"
-                     TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"></TextBox>
-
-            <TextBox Grid.Row="1" Grid.Column="3" Margin="0 0 10 5" Text="{Binding TextboxItem.ServiceDetails, Mode=TwoWay}"
-                     TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"></TextBox>
-
-            <TextBox Grid.Row="1" Grid.Column="4" Margin="0 0 10 5" Text="{Binding TextboxItem.Price, Mode=TwoWay}"
-                     TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"></TextBox>
-
+            <TextBox Grid.Row="1" Grid.Column="4" Margin="0 0 10 5" 
+                     Text="{Binding TextboxItem.Price, Mode=TwoWay}" 
+                     TextAlignment="Left" 
+                     VerticalContentAlignment="Center" 
+                     FontSize="14" 
+                     IsReadOnly="True"/>
         </Grid>
 
         <!-- Nhóm Button -->
@@ -107,9 +131,10 @@
             <Button Grid.Row="0" Grid.Column="1" Content="UPDATE" FontSize="18" Command="{Binding UpdateCommand}" Background="#fec107" Foreground="Black" FontWeight="Bold" Margin="55 10 55 10"></Button>
             <Button Grid.Row="0" Grid.Column="2" Content="DELETE" FontSize="18" Command="{Binding DeleteCommand}" Background="#dc3546" Foreground="White" FontWeight="Bold" Margin="55 10 55 10"></Button>
             <Button Grid.Row="1" Grid.Column="0" Content="RESET" FontSize="18" Command="{Binding ResetCommand}" Background="#0d6efd" Foreground="White" FontWeight="Bold" Margin="55 10 55 10"></Button>
-            <Button Grid.Row="1" Grid.Column="1" Content="SEARCH" FontSize="18" Command="{Binding SearchCommand}"  Foreground="Black" FontWeight="Bold" Margin="55 10 55 10"></Button>
-            <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="380 10 45 10" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                    TextAlignment="Left" VerticalContentAlignment="Center" FontSize="18">
+            <Button Grid.Row="1" Grid.Column="1" Content="SEARCH" FontSize="18" Command="{Binding SearchCommand}" Foreground="Black" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="380 10 45 10" 
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                     TextAlignment="Left" VerticalContentAlignment="Center" FontSize="18">
             </TextBox>
         </Grid>
     </Grid>
