@@ -1,32 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace PawfectPRN.Models;
 
-public partial class PawfectprnContext : DbContext
+public partial class PawfectPrnContext : DbContext
 {
-    public PawfectprnContext()
+    public PawfectPrnContext()
     {
     }
 
-    public PawfectprnContext(DbContextOptions<PawfectprnContext> options)
+    public PawfectPrnContext(DbContextOptions<PawfectPrnContext> options)
         : base(options)
     {
     }
-
-    private string GetConnectionString()
-    {
-        IConfiguration configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", true, true)
-            .Build();
-        var connectionstring = configuration["ConnectionStrings:DefaultConnection"];
-        return connectionstring;
-    }
-
 
     public virtual DbSet<Account> Accounts { get; set; }
 
@@ -44,17 +31,17 @@ public partial class PawfectprnContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=pawfectprn;User ID=sa;Password=123456789;Trust Server Certificate=True");
+        => optionsBuilder.UseSqlServer("Data Source=NITRO5\\SQLEXPRESS;Initial Catalog=PawfectPRN;User ID=sa;Password=123456789;Trust Server Certificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e => e.AccountId).HasName("PK__accounts__46A222CD6C4BA5BE");
+            entity.HasKey(e => e.AccountId).HasName("PK__accounts__46A222CD3F4DFC76");
 
             entity.ToTable("accounts");
 
-            entity.HasIndex(e => e.Email, "UQ__accounts__AB6E616400B24F11").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__accounts__AB6E6164B2FE1614").IsUnique();
 
             entity.Property(e => e.AccountId).HasColumnName("account_id");
             entity.Property(e => e.Address)
@@ -64,13 +51,12 @@ public partial class PawfectprnContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("email");
-            entity.Property(e => e.Gender)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .HasColumnName("gender");
             entity.Property(e => e.FullName)
                 .HasMaxLength(100)
                 .HasColumnName("full_name");
+            entity.Property(e => e.Gender)
+                .HasMaxLength(10)
+                .HasColumnName("gender");
             entity.Property(e => e.Password)
                 .HasMaxLength(255)
                 .IsUnicode(false)
@@ -86,11 +72,11 @@ public partial class PawfectprnContext : DbContext
 
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.CategoryId).HasName("PK__categori__D54EE9B4D3D5B6E5");
+            entity.HasKey(e => e.CategoryId).HasName("PK__categori__D54EE9B4A5F13E27");
 
             entity.ToTable("categories");
 
-            entity.HasIndex(e => e.CategoryName, "UQ__categori__5189E255A0F7C39C").IsUnique();
+            entity.HasIndex(e => e.CategoryName, "UQ__categori__5189E25572709416").IsUnique();
 
             entity.Property(e => e.CategoryId).HasColumnName("category_id");
             entity.Property(e => e.CategoryName)
@@ -100,7 +86,7 @@ public partial class PawfectprnContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__orders__4659622927A84E99");
+            entity.HasKey(e => e.OrderId).HasName("PK__orders__465962291D2C290E");
 
             entity.ToTable("orders");
 
@@ -121,12 +107,12 @@ public partial class PawfectprnContext : DbContext
             entity.HasOne(d => d.Account).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.AccountId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__orders__account___5535A963");
+                .HasConstraintName("FK__orders__account___5629CD9C");
         });
 
         modelBuilder.Entity<OrderDetail>(entity =>
         {
-            entity.HasKey(e => e.OrderDetailId).HasName("PK__order_de__3C5A4080CF0ACD91");
+            entity.HasKey(e => e.OrderDetailId).HasName("PK__order_de__3C5A40802EB74849");
 
             entity.ToTable("order_details");
 
@@ -141,17 +127,17 @@ public partial class PawfectprnContext : DbContext
             entity.HasOne(d => d.Order).WithMany(p => p.OrderDetails)
                 .HasForeignKey(d => d.OrderId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__order_det__order__59063A47");
+                .HasConstraintName("FK__order_det__order__59FA5E80");
 
             entity.HasOne(d => d.Product).WithMany(p => p.OrderDetails)
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__order_det__produ__59FA5E80");
+                .HasConstraintName("FK__order_det__produ__5AEE82B9");
         });
 
         modelBuilder.Entity<PetHotel>(entity =>
         {
-            entity.HasKey(e => e.PethotelId).HasName("PK__pet_hote__3256CE5DF8D5312C");
+            entity.HasKey(e => e.PethotelId).HasName("PK__pet_hote__3256CE5D83B653BA");
 
             entity.ToTable("pet_hotels");
 
@@ -172,7 +158,7 @@ public partial class PawfectprnContext : DbContext
 
         modelBuilder.Entity<PethotelBooking>(entity =>
         {
-            entity.HasKey(e => e.BookingId).HasName("PK__pethotel__5DE3A5B126212E73");
+            entity.HasKey(e => e.BookingId).HasName("PK__pethotel__5DE3A5B10A74A007");
 
             entity.ToTable("pethotel_bookings");
 
@@ -184,21 +170,25 @@ public partial class PawfectprnContext : DbContext
                 .HasColumnName("booking_date");
             entity.Property(e => e.PethotelId).HasColumnName("pethotel_id");
             entity.Property(e => e.ServiceDetails).HasColumnName("service_details");
+            entity.Property(e => e.Status)
+                .HasMaxLength(20)
+                .HasDefaultValue("Pending")
+                .HasColumnName("status");
 
             entity.HasOne(d => d.Account).WithMany(p => p.PethotelBookings)
                 .HasForeignKey(d => d.AccountId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__pethotel___accou__60A75C0F");
+                .HasConstraintName("FK__pethotel___accou__628FA481");
 
             entity.HasOne(d => d.Pethotel).WithMany(p => p.PethotelBookings)
                 .HasForeignKey(d => d.PethotelId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__pethotel___petho__619B8048");
+                .HasConstraintName("FK__pethotel___petho__6383C8BA");
         });
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__products__47027DF5415DDFF2");
+            entity.HasKey(e => e.ProductId).HasName("PK__products__47027DF5547DAFD1");
 
             entity.ToTable("products");
 

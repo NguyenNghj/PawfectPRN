@@ -49,7 +49,7 @@ namespace PawfectPRN.ViewModels
 
             if (result == MessageBoxResult.Yes)
             {
-                using (var context = new PawfectprnContext())
+                using (var context = new PawfectPrnContext())
                 {
                     var category = context.Categories.FirstOrDefault(c => c.CategoryId == SelectedItem.CategoryId);
                     if (category != null)
@@ -86,7 +86,7 @@ namespace PawfectPRN.ViewModels
                 return;
             }
 
-            using (var context = new PawfectprnContext())
+            using (var context = new PawfectPrnContext())
             {
                 var filteredCategories = context.Categories
                     .Where(c => c.CategoryName.ToLower().Contains(SearchText.ToLower()))
@@ -110,7 +110,7 @@ namespace PawfectPRN.ViewModels
                 return;
             }
 
-            using (var context = new PawfectprnContext())
+            using (var context = new PawfectPrnContext())
             {
                 // Kiểm tra trùng lặp CategoryName
                 if (context.Categories.Any(c => c.CategoryName.ToLower() == TextBoxItem.CategoryName.ToLower()))
@@ -154,7 +154,7 @@ namespace PawfectPRN.ViewModels
                     return;
                 }
 
-                using (var context = new PawfectprnContext())
+                using (var context = new PawfectPrnContext())
                 {
                     var existingCategory = context.Categories.FirstOrDefault(c => c.CategoryId == SelectedItem.CategoryId);
                     if (existingCategory != null)
@@ -185,7 +185,7 @@ namespace PawfectPRN.ViewModels
 
         private void LoadCategories()
         {
-            using (var context = new PawfectprnContext())
+            using (var context = new PawfectPrnContext())
             {
                 var categoryList = context.Categories.ToList();
                 categories = new ObservableCollection<Category>(categoryList);

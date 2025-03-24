@@ -168,7 +168,7 @@ namespace PawfectPRN.ViewModels
                 return;
             }
 
-            using (var context = new PawfectprnContext())
+            using (var context = new PawfectPrnContext())
             {
                 if (context.Accounts.Any(a => a.Email == Email))
                 {
