@@ -10,17 +10,23 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="0.9*"/>
             <RowDefinition Height="1.5*"/>
             <RowDefinition Height="6*"/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2.5*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*" />
         </Grid.ColumnDefinitions>
 
+        <Grid Grid.Row="0" Background="White">
+            <TextBlock Text="Management Product" FontSize="32" FontWeight="Bold"
+               HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        </Grid>
+
         <!-- Nhóm Data list -->
-        <Grid Grid.Row="1" Grid.RowSpan="2" Background="Red">
+        <Grid Grid.Row="2" Grid.RowSpan="2" Background="Red">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="39*"/>
             </Grid.ColumnDefinitions>
@@ -40,14 +46,14 @@
                     <DataGridTextColumn FontSize="16" Header="CategoryName" Width="Auto" Binding="{Binding CategoryName}"/>
                     <DataGridTextColumn FontSize="16" Header="Name" Width="0.8*" Binding="{Binding Name}"/>
                     <DataGridTextColumn FontSize="16" Header="Description" Width="*" Binding="{Binding Description}"/>
-                    <DataGridTextColumn FontSize="16" Header="Price" Width="0.4*" Binding="{Binding Price}"/>
+                    <DataGridTextColumn FontSize="16" Header="Price" Width="0.4*" Binding="{Binding Price, StringFormat=N0, ConverterCulture='vi-VN'}"/>
                     <DataGridTextColumn FontSize="16" Header="StockQuantity" Width="Auto" Binding="{Binding StockQuantity}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
 
         <!-- Nhóm Input Fields-->
-        <Grid Grid.Row="0" Grid.Column="0" Background="White">
+        <Grid Grid.Row="1" Grid.Column="0" Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="5*"/>
                 <RowDefinition Height="5*"/>
@@ -84,14 +90,16 @@
                      TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"></TextBox>
             <TextBox Grid.Row="1" Grid.Column="3" Margin="0 0 10 5" Text="{Binding TextBoxItem.Description, Mode=TwoWay}"
                      TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"></TextBox>
-            <TextBox Grid.Row="1" Grid.Column="4" Margin="0 0 10 5" Text="{Binding TextBoxItem.Price, Mode=TwoWay}"
-                     TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"></TextBox>
+            <TextBox Grid.Row="1" Grid.Column="4" Margin="0 0 10 5" Text="{Binding TextBoxItem.Price, Mode=TwoWay, StringFormat=N0, ConverterCulture='vi-VN'}"
+                     TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"
+                     PreviewTextInput="NumberValidationTextBox"></TextBox>
             <TextBox Grid.Row="1" Grid.Column="5" Margin="0 0 10 5" Text="{Binding TextBoxItem.StockQuantity, Mode=TwoWay}"
-                     TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"></TextBox>
+                     TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"
+                     PreviewTextInput="NumberValidationTextBox"></TextBox>
         </Grid>
 
         <!-- Nhóm Button -->
-        <Grid Grid.Row="2" Grid.RowSpan="1" Background="#8C6E63">
+        <Grid Grid.Row="3" Grid.RowSpan="1" Background="#8C6E63">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>

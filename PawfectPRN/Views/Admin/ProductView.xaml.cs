@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,6 +27,12 @@ namespace PawfectPRN.Views.Admin
         {
             InitializeComponent();
             this.DataContext = new ProductViewModel();
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+"); // Chỉ cho phép số
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

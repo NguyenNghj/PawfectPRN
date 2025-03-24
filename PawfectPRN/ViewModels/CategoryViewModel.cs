@@ -11,7 +11,7 @@ using FirstCode.Helper;
 using FirstCode.ViewModels;
 using PawfectPRN.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Text.RegularExpressions;
+using PawfectPRN.Validation; // Thêm namespace của Validation
 
 namespace PawfectPRN.ViewModels
 {
@@ -62,8 +62,9 @@ namespace PawfectPRN.ViewModels
 
                         context.Categories.Remove(category);
                         context.SaveChanges();
-                        MessageBox.Show("Xóa danh mục thành công!");                   
+                        MessageBox.Show("Xóa danh mục thành công!");
                         LoadCategories();
+
                     }
                 }
             }
@@ -103,8 +104,8 @@ namespace PawfectPRN.ViewModels
                 TextBoxItem = new Category();
             }
 
-            // Validation
-            if (!ValidateCategoryName(TextBoxItem.CategoryName, out string errorMessage))
+            // Validation sử dụng CategoryValidator từ namespace mới
+            if (!CategoryValidator.ValidateCategoryName(TextBoxItem.CategoryName, out string errorMessage))
             {
                 MessageBox.Show(errorMessage);
                 return;
@@ -112,7 +113,6 @@ namespace PawfectPRN.ViewModels
 
             using (var context = new PawfectprnContext())
             {
-                // Kiểm tra trùng lặp CategoryName
                 if (context.Categories.Any(c => c.CategoryName.ToLower() == TextBoxItem.CategoryName.ToLower()))
                 {
                     MessageBox.Show("Tên danh mục đã tồn tại! Vui lòng chọn tên khác.");
@@ -147,8 +147,8 @@ namespace PawfectPRN.ViewModels
                     return;
                 }
 
-                // Validation
-                if (!ValidateCategoryName(TextBoxItem.CategoryName, out string errorMessage))
+                // Validation sử dụng CategoryValidator từ namespace mới
+                if (!CategoryValidator.ValidateCategoryName(TextBoxItem.CategoryName, out string errorMessage))
                 {
                     MessageBox.Show(errorMessage);
                     return;
@@ -159,7 +159,6 @@ namespace PawfectPRN.ViewModels
                     var existingCategory = context.Categories.FirstOrDefault(c => c.CategoryId == SelectedItem.CategoryId);
                     if (existingCategory != null)
                     {
-                        // Kiểm tra trùng lặp CategoryName (ngoại trừ chính nó)
                         if (context.Categories.Any(c => c.CategoryName.ToLower() == TextBoxItem.CategoryName.ToLower() && c.CategoryId != SelectedItem.CategoryId))
                         {
                             MessageBox.Show("Tên danh mục đã tồn tại! Vui lòng chọn tên khác.");
@@ -236,35 +235,6 @@ namespace PawfectPRN.ViewModels
                 _searchText = value;
                 OnPropertyChanged(nameof(SearchText));
             }
-        }
-
-        // Hàm validation riêng cho CategoryName
-        private bool ValidateCategoryName(string categoryName, out string errorMessage)
-        {
-            errorMessage = string.Empty;
-
-            // Kiểm tra rỗng
-            if (string.IsNullOrWhiteSpace(categoryName))
-            {
-                errorMessage = "Vui lòng nhập tên danh mục!";
-                return false;
-            }
-
-            // Kiểm tra độ dài (giả sử tối đa 50 ký tự)
-            if (categoryName.Length > 50)
-            {
-                errorMessage = "Tên danh mục không được vượt quá 50 ký tự!";
-                return false;
-            }
-
-            // Kiểm tra ký tự hợp lệ: cho phép chữ cái (bao gồm có dấu), số và khoảng trắng
-            if (!Regex.IsMatch(categoryName, @"^[\p{L}0-9\s]+$"))
-            {
-                errorMessage = "Tên danh mục chỉ được chứa chữ cái, số và khoảng trắng!";
-                return false;
-            }
-
-            return true;
         }
     }
 }

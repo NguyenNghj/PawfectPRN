@@ -11,7 +11,7 @@ using FirstCode.Helper;
 using FirstCode.ViewModels;
 using PawfectPRN.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Text.RegularExpressions;
+using PawfectPRN.Validation; // Thêm namespace của Validation
 
 namespace PawfectPRN.ViewModels
 {
@@ -29,9 +29,9 @@ namespace PawfectPRN.ViewModels
 
         public ProductViewModel()
         {
-
             LoadCategory();
             LoadProducts();
+            TextBoxItem = new Product();
             AddCommand = new RelayCommand(Add);
             UpdateCommand = new RelayCommand(Update);
             SearchCommand = new RelayCommand(Search);
@@ -61,6 +61,7 @@ namespace PawfectPRN.ViewModels
                         context.SaveChanges();
                         MessageBox.Show("Xóa sản phẩm thành công!");
                         LoadProducts();
+
                     }
                 }
             }
@@ -68,11 +69,12 @@ namespace PawfectPRN.ViewModels
 
         private void Reset(object obj)
         {
-            TextBoxItem = new Product(); // Tạo một Product mới với các giá trị mặc định
+            TextBoxItem = new Product();
             SearchText = null;
-            SelectedCategory = null; // Đặt lại ComboBox
-            OnPropertyChanged(nameof(TextBoxItem)); // Thông báo giao diện cập nhật
-            OnPropertyChanged(nameof(SelectedCategory)); // Thông báo cập nhật SelectedCategory
+            SelectedCategory = null;
+            OnPropertyChanged(nameof(TextBoxItem));
+            OnPropertyChanged(nameof(SelectedCategory));
+            OnPropertyChanged(nameof(SearchText));
             LoadProducts();
         }
 
@@ -80,15 +82,15 @@ namespace PawfectPRN.ViewModels
         {
             if (string.IsNullOrWhiteSpace(SearchText))
             {
-                LoadProducts(); // Nếu không có từ khóa, hiển thị toàn bộ danh sách
+                LoadProducts();
                 return;
             }
 
             using (var context = new PawfectprnContext())
             {
                 var filteredProducts = context.Products
-                   .Where(p => p.Name.ToLower().Contains(SearchText.ToLower()))
-                   .ToList();
+                    .Where(p => p.Name.ToLower().Contains(SearchText.ToLower()))
+                    .ToList();
                 products = new ObservableCollection<Product>(filteredProducts);
                 OnPropertyChanged(nameof(products));
             }
@@ -98,26 +100,33 @@ namespace PawfectPRN.ViewModels
         {
             if (TextBoxItem == null)
             {
-                TextBoxItem = new Product(); // Khởi tạo TextBoxItem nếu nó null
+                TextBoxItem = new Product();
             }
 
-
+            // Validation sử dụng ProductValidator từ namespace mới
             using (var context = new PawfectprnContext())
             {
-                if (TextBoxItem.CategoryId == 0 || !context.Categories.Any(c => c.CategoryId == TextBoxItem.CategoryId))
+                if (!ProductValidator.ValidateProduct(TextBoxItem, out string errorMessage, context))
                 {
-                    MessageBox.Show("Vui lòng nhập không để các trường dữ liệu trống!");
+                    MessageBox.Show(errorMessage);
                     return;
                 }
+
+                // Kiểm tra trùng lặp Name
+                if (context.Products.Any(p => p.Name.ToLower() == TextBoxItem.Name.ToLower()))
+                {
+                    MessageBox.Show("Tên sản phẩm đã tồn tại! Vui lòng chọn tên khác.");
+                    return;
+                }
+
                 Product newProduct = new Product
                 {
-                    Name = TextBoxItem.Name ?? "",
+                    Name = TextBoxItem.Name,
                     Description = TextBoxItem.Description,
                     Price = TextBoxItem.Price,
                     StockQuantity = TextBoxItem.StockQuantity,
                     CategoryId = TextBoxItem.CategoryId
                 };
-
 
                 context.Products.Add(newProduct);
                 context.SaveChanges();
@@ -142,28 +151,34 @@ namespace PawfectPRN.ViewModels
                     return;
                 }
 
+                // Validation sử dụng ProductValidator từ namespace mới
                 using (var context = new PawfectprnContext())
                 {
+                    if (!ProductValidator.ValidateProduct(TextBoxItem, out string errorMessage, context))
+                    {
+                        MessageBox.Show(errorMessage);
+                        return;
+                    }
+
                     var existingProduct = context.Products.FirstOrDefault(p => p.ProductId == SelectedItem.ProductId);
                     if (existingProduct != null)
                     {
-                        // Cập nhật thông tin sản phẩm
-                        existingProduct.Name = TextBoxItem.Name ?? "";
-                        existingProduct.Description = TextBoxItem.Description ?? "";
+                        // Kiểm tra trùng lặp Name (ngoại trừ chính nó)
+                        if (context.Products.Any(p => p.Name.ToLower() == TextBoxItem.Name.ToLower() && p.ProductId != SelectedItem.ProductId))
+                        {
+                            MessageBox.Show("Tên sản phẩm đã tồn tại! Vui lòng chọn tên khác.");
+                            return;
+                        }
+
+                        existingProduct.Name = TextBoxItem.Name;
+                        existingProduct.Description = TextBoxItem.Description;
                         existingProduct.Price = TextBoxItem.Price;
                         existingProduct.StockQuantity = TextBoxItem.StockQuantity;
                         existingProduct.CategoryId = TextBoxItem.CategoryId;
 
-                        try
-                        {
-                            context.SaveChanges();
-                            MessageBox.Show("Cập nhật sản phẩm thành công!");
-                            LoadProducts(); // Tải lại toàn bộ danh sách để đồng bộ
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show($"Lỗi khi cập nhật sản phẩm: {ex.Message}");
-                        }
+                        context.SaveChanges();
+                        MessageBox.Show("Cập nhật sản phẩm thành công!");
+                        LoadProducts();
                     }
                     else
                     {
@@ -173,15 +188,16 @@ namespace PawfectPRN.ViewModels
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.ToString());
+                MessageBox.Show($"Lỗi: {e.Message}");
             }
         }
+
         private void LoadProducts()
         {
             using (var context = new PawfectprnContext())
             {
                 var productList = context.Products
-                    .Include(p => p.Category) // Tải dữ liệu từ bảng Categories
+                    .Include(p => p.Category)
                     .ToList();
                 products = new ObservableCollection<Product>(productList);
                 OnPropertyChanged(nameof(products));
@@ -196,6 +212,7 @@ namespace PawfectPRN.ViewModels
                 OnPropertyChanged(nameof(categories));
             }
         }
+
         private Category _selectedCategory;
         public Category SelectedCategory
         {
@@ -206,8 +223,7 @@ namespace PawfectPRN.ViewModels
                 OnPropertyChanged(nameof(SelectedCategory));
                 if (_selectedCategory != null && TextBoxItem != null)
                 {
-                    // Chuyển đổi kiểu dữ liệu nếu cần
-                    TextBoxItem.CategoryId = _selectedCategory.CategoryId; // Đảm bảo kiểu dữ liệu khớp
+                    TextBoxItem.CategoryId = _selectedCategory.CategoryId;
                 }
             }
         }
@@ -227,7 +243,6 @@ namespace PawfectPRN.ViewModels
             }
         }
 
-
         private Product _selectedItem;
         public Product SelectedItem
         {
@@ -238,7 +253,6 @@ namespace PawfectPRN.ViewModels
                 OnPropertyChanged(nameof(SelectedItem));
                 if (_selectedItem != null)
                 {
-                    // Gán trực tiếp hoặc tạo bản sao thủ công
                     TextBoxItem = new Product
                     {
                         ProductId = _selectedItem.ProductId,
@@ -247,17 +261,16 @@ namespace PawfectPRN.ViewModels
                         Description = _selectedItem.Description,
                         Price = _selectedItem.Price,
                         StockQuantity = _selectedItem.StockQuantity,
-                        Category = _selectedItem.Category // Giữ tham chiếu đến Category
+                        Category = _selectedItem.Category
                     };
                 }
                 else
                 {
-                    TextBoxItem = null; // Reset TextBoxItem khi không có lựa chọn
+                    TextBoxItem = new Product();
                 }
             }
         }
 
-        // Thêm thuộc tính SearchText để hỗ trợ tìm kiếm
         private string _searchText;
         public string SearchText
         {
@@ -270,4 +283,3 @@ namespace PawfectPRN.ViewModels
         }
     }
 }
-

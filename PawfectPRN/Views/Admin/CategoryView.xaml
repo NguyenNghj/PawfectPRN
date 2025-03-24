@@ -10,9 +10,10 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="0.9*"/>
             <RowDefinition Height="1.5*"/>
             <RowDefinition Height="6*"/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2.5*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -20,7 +21,7 @@
         </Grid.ColumnDefinitions>
 
         <!-- Nhóm Data list -->
-        <Grid Grid.Row="1" Grid.RowSpan="2" Background="Red">
+        <Grid Grid.Row="2" Grid.RowSpan="2" Background="Red">
             <DataGrid x:Name="listView_Student" ItemsSource="{Binding categories}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
             ColumnWidth="*" Margin="5"
             RowHeight="27" FontSize="16"
@@ -39,8 +40,13 @@
             </DataGrid>
         </Grid>
 
+        <Grid Grid.Row="0" Background="White">
+            <TextBlock Text="Management Category" FontSize="32" FontWeight="Bold"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+        </Grid>
+
         <!-- Nhóm Input Fields-->
-        <Grid Grid.Row="0" Grid.Column="0" Background="White">
+        <Grid Grid.Row="1" Grid.Column="0" Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="5*"/>
                 <RowDefinition Height="5*"/>
@@ -62,7 +68,7 @@
         </Grid>
 
         <!-- Nhóm Button -->
-        <Grid Grid.Row="2" Background="#8C6E63">
+        <Grid Grid.Row="3" Background="#8C6E63">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
