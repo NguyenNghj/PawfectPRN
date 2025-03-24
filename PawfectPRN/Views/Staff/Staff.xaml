@@ -49,7 +49,7 @@
         <Frame Grid.Row="1" x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
         <fa:ImageAwesome Icon="SignOut" Foreground="Red" Width="30" Height="30"
                          HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1"
-                         Margin="0,10,20,0" Cursor="Hand"/>
+                         Margin="0,10,20,0" Cursor="Hand" MouseDown="Logout_Click"/>
 
         <Grid Grid.Row="2" Background="#FFF2DF">
             <Label Content="Group 3 Pawfect – Caring for Pets, Just Like Family" FontWeight="Bold" Foreground="#3E2522" HorizontalAlignment="Right" VerticalAlignment="Center"/>
