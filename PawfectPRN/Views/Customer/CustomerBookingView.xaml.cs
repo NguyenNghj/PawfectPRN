@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace PawfectPRN.Views.Customer
 {
     /// <summary>
-    /// Interaction logic for Booking.xaml
+    /// Interaction logic for CustomerBookingView.xaml
     /// </summary>
-    public partial class Booking : Page
+    public partial class CustomerBookingView : Page
     {
-        public Booking()
+        public CustomerBookingView()
         {
             InitializeComponent();
         }
