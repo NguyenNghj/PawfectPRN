@@ -1,5 +1,4 @@
-﻿using PawfectPRN.Models;
-using PawfectPRN.Views.Admin;
+﻿using PawfectPRN.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,23 +11,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PawfectPRN.Views.Staff
 {
     /// <summary>
-    /// Interaction logic for Staff.xaml
+    /// Interaction logic for BookingView.xaml
     /// </summary>
-    public partial class Staff : Window
+    public partial class BookingView : Page
     {
-        public Staff(Account account)
+        public BookingView()
         {
             InitializeComponent();
-        }
-
-        private void Booking_Click(object sender, RoutedEventArgs e)
-        {
-            MainFrame.Content = new BookingView();
+            this.DataContext = new StaffBookingViewModel();
         }
     }
 }

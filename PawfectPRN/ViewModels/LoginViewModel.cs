@@ -8,6 +8,7 @@ using PawfectPRN.Models;
 using PawfectPRN.Views.Admin;
 using PawfectPRN.Views.Customer;
 using FirstCode.Helper;
+using PawfectPRN.Views.Staff;
 
 namespace PawfectPRN.ViewModels
 {
@@ -77,6 +78,9 @@ namespace PawfectPRN.ViewModels
                             break;
                         case "customer":
                             nextWindow = new Customer(user);
+                            break;
+                        case "staff":
+                            nextWindow = new Staff(user);
                             break;
                         default:
                             MessageBox.Show("Invalid role.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
