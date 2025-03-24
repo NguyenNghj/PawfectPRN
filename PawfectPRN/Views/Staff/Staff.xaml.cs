@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PawfectPRN.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace PawfectPRN.Views.Staff
     /// </summary>
     public partial class Staff : Window
     {
-        public Staff()
+        public Staff(Account account)
         {
             InitializeComponent();
         }
