@@ -35,6 +35,15 @@ namespace PawfectPRN.Views.Admin
         {
             MainFrame.Content = new CategoryView();
         }
+        private void Staff_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new StaffView();
+        }
+
+        private void PetHotel_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new PetHotelView();
+        }
 
         private void Logout_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
