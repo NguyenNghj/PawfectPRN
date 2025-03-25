@@ -11,9 +11,9 @@
     <Grid>
         <!-- Định nghĩa 3 hàng: Input Fields, DataGrid và Button -->
         <Grid.RowDefinitions>
-            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="1.8*"/>
             <!-- Nhóm Input Fields -->
-            <RowDefinition Height="6.5*"/>
+            <RowDefinition Height="6*"/>
             <!-- Nhóm DataGrid hiển thị danh sách -->
             <RowDefinition Height="2.5*"/>
             <!-- Nhóm Button -->
