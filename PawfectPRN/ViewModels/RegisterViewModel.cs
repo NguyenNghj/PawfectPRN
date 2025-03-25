@@ -1,16 +1,11 @@
 ﻿using FirstCode.Helper;
 using PawfectPRN.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using System.Windows;
-using FirstCode.ViewModels;
-using System.Windows.Navigation;
+using System.Windows.Input;
 using PawfectPRN.Views;
+using FirstCode.ViewModels;
+using PawfectPRN.Validation;
 
 namespace PawfectPRN.ViewModels
 {
@@ -119,52 +114,12 @@ namespace PawfectPRN.ViewModels
             return hashed;
         }
 
-        private bool ValidateEmail(string email)
-        {
-            return Regex.IsMatch(email, "^[\\w-\\.+]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
-        }
-
-        private bool ValidatePhoneNumber(string phoneNumber)
-        {
-            return Regex.IsMatch(phoneNumber, "^\\d{10,11}$");
-        }
-
         public void Register(object obj)
         {
-            if (string.IsNullOrWhiteSpace(FullName))
+            string validationMessage = RegisterValidator.Validate(FullName, Email, PhoneNumber, Password, ConfirmPassword, Gender);
+            if (validationMessage != null)
             {
-                MessageBox.Show("Please enter your full name.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(Email) || !ValidateEmail(Email))
-            {
-                MessageBox.Show("Please enter a valid email.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(PhoneNumber) || !ValidatePhoneNumber(PhoneNumber))
-            {
-                MessageBox.Show("Please enter a valid phone number (10-11 digits).", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(Password) || Password.Length < 6)
-            {
-                MessageBox.Show("Password must be at least 6 characters long.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(ConfirmPassword))
-            {
-                MessageBox.Show("Please confirm your password.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(Gender))
-            {
-                MessageBox.Show("Please select your gender.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            if (Password != ConfirmPassword)
-            {
-                MessageBox.Show("Password confirmation does not match.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(validationMessage, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 

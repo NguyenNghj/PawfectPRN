@@ -1,5 +1,6 @@
 ﻿using PawfectPRN.Models; 
 using PawfectPRN.Views.Admin;
+using PawfectPRN.Views.Customer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +22,12 @@ namespace PawfectPRN.Views.Staff
     /// </summary>
     public partial class Staff : Window
     {
+        private Account _account;
         public Staff(Account account)
         {
             InitializeComponent();
+            _account = account;
+            MainFrame.Content = new ProfileStaffView(_account);
         }
 
         private void Booking_Click(object sender, RoutedEventArgs e)
@@ -48,6 +52,11 @@ namespace PawfectPRN.Views.Staff
                 // Đóng cửa sổ hiện tại
                 this.Close();
             }
+        }
+
+        private void Profile_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new ProfileStaffView(_account);
         }
     }
 }
