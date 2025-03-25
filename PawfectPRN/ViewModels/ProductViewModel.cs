@@ -11,7 +11,7 @@ using FirstCode.Helper;
 using FirstCode.ViewModels;
 using PawfectPRN.Models;
 using Microsoft.EntityFrameworkCore;
-using PawfectPRN.Validation; // Thêm namespace của Validation
+using PawfectPRN.Validation; // Add namespace for Validation
 
 namespace PawfectPRN.ViewModels
 {
@@ -43,11 +43,11 @@ namespace PawfectPRN.ViewModels
         {
             if (SelectedItem == null)
             {
-                MessageBox.Show("Vui lòng chọn sản phẩm để xóa!");
+                MessageBox.Show("Please select a product to delete!");
                 return;
             }
 
-            var result = MessageBox.Show("Bạn có chắc chắn muốn xóa sản phẩm này?", "Xác nhận xóa",
+            var result = MessageBox.Show("Are you sure you want to delete this product?", "Delete Confirmation",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             if (result == MessageBoxResult.Yes)
@@ -59,9 +59,8 @@ namespace PawfectPRN.ViewModels
                     {
                         context.Products.Remove(product);
                         context.SaveChanges();
-                        MessageBox.Show("Xóa sản phẩm thành công!");
+                        MessageBox.Show("Product deleted successfully!");
                         LoadProducts();
-
                     }
                 }
             }
@@ -103,7 +102,7 @@ namespace PawfectPRN.ViewModels
                 TextBoxItem = new Product();
             }
 
-            // Validation sử dụng ProductValidator từ namespace mới
+            // Validation using ProductValidator from the new namespace
             using (var context = new PawfectPrnContext())
             {
                 if (!ProductValidator.ValidateProduct(TextBoxItem, out string errorMessage, context))
@@ -112,10 +111,10 @@ namespace PawfectPRN.ViewModels
                     return;
                 }
 
-                // Kiểm tra trùng lặp Name
+                // Check for duplicate Name
                 if (context.Products.Any(p => p.Name.ToLower() == TextBoxItem.Name.ToLower()))
                 {
-                    MessageBox.Show("Tên sản phẩm đã tồn tại! Vui lòng chọn tên khác.");
+                    MessageBox.Show("Product name already exists! Please choose a different name.");
                     return;
                 }
 
@@ -130,7 +129,7 @@ namespace PawfectPRN.ViewModels
 
                 context.Products.Add(newProduct);
                 context.SaveChanges();
-                MessageBox.Show("Thêm sản phẩm thành công!");
+                MessageBox.Show("Product added successfully!");
                 LoadProducts();
             }
         }
@@ -141,17 +140,17 @@ namespace PawfectPRN.ViewModels
             {
                 if (SelectedItem == null)
                 {
-                    MessageBox.Show("Vui lòng chọn sản phẩm để cập nhật!");
+                    MessageBox.Show("Please select a product to update!");
                     return;
                 }
 
                 if (TextBoxItem == null)
                 {
-                    MessageBox.Show("Lỗi: TextBoxItem chưa được khởi tạo!");
+                    MessageBox.Show("Error: TextBoxItem has not been initialized!");
                     return;
                 }
 
-                // Validation sử dụng ProductValidator từ namespace mới
+                // Validation using ProductValidator from the new namespace
                 using (var context = new PawfectPrnContext())
                 {
                     if (!ProductValidator.ValidateProduct(TextBoxItem, out string errorMessage, context))
@@ -163,10 +162,10 @@ namespace PawfectPRN.ViewModels
                     var existingProduct = context.Products.FirstOrDefault(p => p.ProductId == SelectedItem.ProductId);
                     if (existingProduct != null)
                     {
-                        // Kiểm tra trùng lặp Name (ngoại trừ chính nó)
+                        // Check for duplicate Name (excluding itself)
                         if (context.Products.Any(p => p.Name.ToLower() == TextBoxItem.Name.ToLower() && p.ProductId != SelectedItem.ProductId))
                         {
-                            MessageBox.Show("Tên sản phẩm đã tồn tại! Vui lòng chọn tên khác.");
+                            MessageBox.Show("Product name already exists! Please choose a different name.");
                             return;
                         }
 
@@ -177,18 +176,18 @@ namespace PawfectPRN.ViewModels
                         existingProduct.CategoryId = TextBoxItem.CategoryId;
 
                         context.SaveChanges();
-                        MessageBox.Show("Cập nhật sản phẩm thành công!");
+                        MessageBox.Show("Product updated successfully!");
                         LoadProducts();
                     }
                     else
                     {
-                        MessageBox.Show("Không tìm thấy sản phẩm để cập nhật!");
+                        MessageBox.Show("Product not found for update!");
                     }
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Lỗi: {e.Message}");
+                MessageBox.Show($"Error: {e.Message}");
             }
         }
 

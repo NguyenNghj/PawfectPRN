@@ -50,18 +50,27 @@ namespace PawfectPRN.ViewModels
                 TextBoxItem = new PethotelBooking();
             }
 
-            // Validation
             using (var context = new PawfectPrnContext())
             {
-                if (TextBoxItem.AccountId == 0 || TextBoxItem.PethotelId == 0 || !BookingDate.HasValue || !BookingTime.HasValue || !CheckoutDate.HasValue || !CheckoutTime.HasValue)
+                // Kiểm tra validation
+                if (!StaffBookingValidator.ValidateBooking(TextBoxItem, BookingDate, BookingTime, CheckoutDate, CheckoutTime, statuses.ToList(), out string errorMessage, context))
                 {
-                    MessageBox.Show("Vui lòng điền đầy đủ thông tin: Khách hàng, Khách sạn, Ngày đặt, Thời gian đặt, Ngày trả, Thời gian trả!");
+                    MessageBox.Show(errorMessage, "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
                 // Kết hợp ngày và giờ
                 var bookingDateTime = BookingDate.Value.Date + BookingTime.Value.TimeOfDay;
                 var checkoutDateTime = CheckoutDate.Value.Date + CheckoutTime.Value.TimeOfDay;
+
+                // Tính giá tiền dựa trên số ngày và giá của PetHotel
+                var petHotel = context.PetHotels.FirstOrDefault(p => p.PethotelId == TextBoxItem.PethotelId);
+                decimal price = 0;
+                if (petHotel != null && bookingDateTime != null && checkoutDateTime != null)
+                {
+                    var days = (checkoutDateTime - bookingDateTime).TotalDays;
+                    price = petHotel.Price * (decimal)(days > 0 ? days : 1);
+                }
 
                 PethotelBooking newBooking = new PethotelBooking
                 {
@@ -70,12 +79,13 @@ namespace PawfectPRN.ViewModels
                     BookingDate = bookingDateTime,
                     CheckoutDate = checkoutDateTime,
                     ServiceDetails = TextBoxItem.ServiceDetails,
-                    Status = TextBoxItem.Status ?? "Pending"
+                    Status = TextBoxItem.Status ?? "Pending",
+                    Price = price
                 };
 
                 context.PethotelBookings.Add(newBooking);
                 context.SaveChanges();
-                MessageBox.Show("Thêm đặt phòng thành công!");
+                MessageBox.Show("Booking added successfully!");
                 LoadBookings();
             }
         }
@@ -86,44 +96,55 @@ namespace PawfectPRN.ViewModels
             {
                 if (SelectedItem == null)
                 {
-                    MessageBox.Show("Vui lòng chọn đặt phòng để cập nhật!");
+                    MessageBox.Show("Please select a booking to update!");
                     return;
                 }
-
-                if (!BookingDate.HasValue || !BookingTime.HasValue || !CheckoutDate.HasValue || !CheckoutTime.HasValue)
-                {
-                    MessageBox.Show("Vui lòng điền đầy đủ thông tin ngày đặt và ngày trả!");
-                    return;
-                }
-
-                var bookingDateTime = BookingDate.Value.Date + BookingTime.Value.TimeOfDay;
-                var checkoutDateTime = CheckoutDate.Value.Date + CheckoutTime.Value.TimeOfDay;
 
                 using (var context = new PawfectPrnContext())
                 {
+                    // Kiểm tra validation
+                    if (!StaffBookingValidator.ValidateBooking(TextBoxItem, BookingDate, BookingTime, CheckoutDate, CheckoutTime, statuses.ToList(), out string errorMessage, context))
+                    {
+                        MessageBox.Show(errorMessage, "Validation Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    var bookingDateTime = BookingDate.Value.Date + BookingTime.Value.TimeOfDay;
+                    var checkoutDateTime = CheckoutDate.Value.Date + CheckoutTime.Value.TimeOfDay;
+
                     var existingBooking = context.PethotelBookings.FirstOrDefault(b => b.BookingId == SelectedItem.BookingId);
                     if (existingBooking != null)
                     {
+                        // Tính lại giá tiền
+                        var petHotel = context.PetHotels.FirstOrDefault(p => p.PethotelId == TextBoxItem.PethotelId);
+                        decimal price = 0;
+                        if (petHotel != null && bookingDateTime != null && checkoutDateTime != null)
+                        {
+                            var days = (checkoutDateTime - bookingDateTime).TotalDays;
+                            price = petHotel.Price * (decimal)(days > 0 ? days : 1);
+                        }
+
                         existingBooking.AccountId = TextBoxItem.AccountId;
                         existingBooking.PethotelId = TextBoxItem.PethotelId;
                         existingBooking.BookingDate = bookingDateTime;
                         existingBooking.CheckoutDate = checkoutDateTime;
                         existingBooking.ServiceDetails = TextBoxItem.ServiceDetails;
                         existingBooking.Status = TextBoxItem.Status;
+                        existingBooking.Price = price;
 
                         context.SaveChanges();
-                        MessageBox.Show("Cập nhật đặt phòng thành công!");
+                        MessageBox.Show("Booking updated successfully!");
                         LoadBookings();
                     }
                     else
                     {
-                        MessageBox.Show("Không tìm thấy đặt phòng để cập nhật!");
+                        MessageBox.Show("Booking not found for update!");
                     }
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Lỗi: {e.Message}");
+                MessageBox.Show($"Error: {e.Message}");
             }
         }
 
@@ -131,11 +152,11 @@ namespace PawfectPRN.ViewModels
         {
             if (SelectedItem == null)
             {
-                MessageBox.Show("Vui lòng chọn đặt phòng để xóa!");
+                MessageBox.Show("Please select a booking to delete!");
                 return;
             }
 
-            var result = MessageBox.Show("Bạn có chắc chắn muốn xóa đặt phòng này?", "Xác nhận xóa",
+            var result = MessageBox.Show("Are you sure you want to delete this booking?", "Delete Confirmation",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             if (result == MessageBoxResult.Yes)
@@ -147,7 +168,7 @@ namespace PawfectPRN.ViewModels
                     {
                         context.PethotelBookings.Remove(booking);
                         context.SaveChanges();
-                        MessageBox.Show("Xóa đặt phòng thành công!");
+                        MessageBox.Show("Booking deleted successfully!");
                         LoadBookings();
                     }
                 }
@@ -193,6 +214,7 @@ namespace PawfectPRN.ViewModels
                     .ToList();
                 bookings = new ObservableCollection<PethotelBooking>(filteredBookings);
                 OnPropertyChanged(nameof(bookings));
+                CalculateTotalPrice();
             }
         }
 
@@ -206,6 +228,7 @@ namespace PawfectPRN.ViewModels
                     .ToList();
                 bookings = new ObservableCollection<PethotelBooking>(bookingList);
                 OnPropertyChanged(nameof(bookings));
+                CalculateTotalPrice();
             }
         }
 
@@ -224,6 +247,23 @@ namespace PawfectPRN.ViewModels
             {
                 accounts = new ObservableCollection<Account>(context.Accounts.ToList());
                 OnPropertyChanged(nameof(accounts));
+            }
+        }
+
+        private void CalculateTotalPrice()
+        {
+            TotalPrice = bookings?.Sum(b => b.Price ?? 0) ?? 0;
+            OnPropertyChanged(nameof(TotalPrice));
+        }
+
+        private decimal _totalPrice;
+        public decimal TotalPrice
+        {
+            get { return _totalPrice; }
+            set
+            {
+                _totalPrice = value;
+                OnPropertyChanged(nameof(TotalPrice));
             }
         }
 
@@ -300,6 +340,7 @@ namespace PawfectPRN.ViewModels
                         CheckoutDate = _selectedItem.CheckoutDate,
                         ServiceDetails = _selectedItem.ServiceDetails,
                         Status = _selectedItem.Status,
+                        Price = _selectedItem.Price,
                         Account = _selectedItem.Account,
                         Pethotel = _selectedItem.Pethotel
                     };

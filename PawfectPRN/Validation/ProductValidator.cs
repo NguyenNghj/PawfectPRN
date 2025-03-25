@@ -10,75 +10,75 @@ namespace PawfectPRN.Validation
 {
     public static class ProductValidator
     {
-        // Validation cho Product
+        // Validation for Product
         public static bool ValidateProduct(Product product, out string errorMessage, PawfectPrnContext context = null)
         {
             errorMessage = string.Empty;
 
-            // Kiểm tra Name
+            // Check Name
             if (string.IsNullOrWhiteSpace(product.Name))
             {
-                errorMessage = "Vui lòng nhập tên sản phẩm!";
+                errorMessage = "Please enter a product name!";
                 return false;
             }
             if (product.Name.Length > 100)
             {
-                errorMessage = "Tên sản phẩm không được vượt quá 100 ký tự!";
+                errorMessage = "Product name must not exceed 100 characters!";
                 return false;
             }
             if (!Regex.IsMatch(product.Name, @"^[\p{L}0-9\s]+$"))
             {
-                errorMessage = "Tên sản phẩm chỉ được chứa chữ cái, số và khoảng trắng!";
+                errorMessage = "Product name can only contain letters, numbers, and spaces!";
                 return false;
             }
 
-            // Kiểm tra CategoryId
+            // Check CategoryId
             if (product.CategoryId == 0)
             {
-                errorMessage = "Vui lòng chọn danh mục cho sản phẩm!";
+                errorMessage = "Please select a category for the product!";
                 return false;
             }
             if (context != null && !context.Categories.Any(c => c.CategoryId == product.CategoryId))
             {
-                errorMessage = "Danh mục không hợp lệ!";
+                errorMessage = "Invalid category!";
                 return false;
             }
 
-            // Kiểm tra Price
-            // Nếu Price là 0, có thể người dùng chưa nhập hoặc nhập sai (chữ cái/ký tự đặc biệt)
+            // Check Price
+            // If Price is 0, user might not have entered it or entered invalid characters
             if (product.Price == 0)
             {
-                errorMessage = "Vui lòng nhập giá sản phẩm hợp lệ (lớn hơn 0)!";
+                errorMessage = "Please enter a valid product price (greater than 0)!";
                 return false;
             }
             if (product.Price < 0)
             {
-                errorMessage = "Giá sản phẩm không được nhỏ hơn 0!";
+                errorMessage = "Product price cannot be less than 0!";
                 return false;
             }
             if (product.Price > 50000000)
             {
-                errorMessage = "Giá sản phẩm không được vượt quá 50 triệu!";
+                errorMessage = "Product price must not exceed 50 million!";
                 return false;
             }
 
-            // Kiểm tra StockQuantity
-            // Nếu StockQuantity là 0, vẫn hợp lệ (có thể sản phẩm hết hàng), nhưng cần kiểm tra nhập sai
+            // Check StockQuantity
+            // StockQuantity of 0 is valid (product might be out of stock), but check for invalid input
             if (product.StockQuantity < 0)
             {
-                errorMessage = "Số lượng tồn kho không được nhỏ hơn 0!";
+                errorMessage = "Stock quantity cannot be less than 0!";
                 return false;
             }
             if (product.StockQuantity > 10000)
             {
-                errorMessage = "Số lượng tồn kho không được vượt quá 10K!";
+                errorMessage = "Stock quantity must not exceed 10K!";
                 return false;
             }
 
-            // Kiểm tra Description (tùy chọn)
+            // Check Description (optional)
             if (!string.IsNullOrEmpty(product.Description) && product.Description.Length > 500)
             {
-                errorMessage = "Mô tả sản phẩm không được vượt quá 500 ký tự!";
+                errorMessage = "Product description must not exceed 500 characters!";
                 return false;
             }
 

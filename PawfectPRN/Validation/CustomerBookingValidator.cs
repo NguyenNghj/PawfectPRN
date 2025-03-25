@@ -14,7 +14,7 @@ namespace PawfectPRN.Validation
 
             if (booking.PethotelId == 0)
             {
-                return (false, "Please select a Pet Hotel!");
+                return (false, "Please select a Pet Room!");
             }
 
             if (booking.BookingDate == null)

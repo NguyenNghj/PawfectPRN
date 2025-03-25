@@ -26,12 +26,12 @@
         </Grid>
 
         <!-- Nhóm Data list -->
-        <Grid Grid.Row="2" Grid.RowSpan="2" Background="Red">
+        <Grid Grid.Row="2" Grid.RowSpan="1" Background="Red">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="39*"/>
             </Grid.ColumnDefinitions>
             <DataGrid x:Name="listView_Student" ItemsSource="{Binding products}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-            ColumnWidth="*" Margin="5,5,5,4"
+            ColumnWidth="*" Margin="5,5,5,5"
             RowHeight="27" FontSize="16"
             CanUserAddRows="False" CanUserDeleteRows="False"
             IsReadOnly="True"

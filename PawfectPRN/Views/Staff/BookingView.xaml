@@ -27,12 +27,12 @@
         </Grid>
 
         <!-- Nhóm Data list -->
-        <Grid Grid.Row="2" Grid.RowSpan="2" Background="Red">
+        <Grid Grid.Row="2" Grid.RowSpan="1" Background="Red">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="39*"/>
             </Grid.ColumnDefinitions>
             <DataGrid x:Name="listView_Student" ItemsSource="{Binding bookings}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                      ColumnWidth="*" Margin="5,5,5,4"
+                      ColumnWidth="*" Margin="5,5,5,5"
                       RowHeight="27" FontSize="16"
                       CanUserAddRows="False" CanUserDeleteRows="False"
                       IsReadOnly="True"
@@ -44,11 +44,12 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn FontSize="16" Header="BookingId" Width="Auto" Binding="{Binding BookingId}"/>
                     <DataGridTextColumn FontSize="16" Header="FullName" Width="Auto" Binding="{Binding Account.FullName}"/>
-                    <DataGridTextColumn FontSize="16" Header="PethotelName" Width="0.8*" Binding="{Binding Pethotel.PethotelName}"/>
-                    <DataGridTextColumn FontSize="16" Header="BookingDate" Width="*" Binding="{Binding BookingDate, StringFormat='dd/MM/yyyy HH:mm'}"/>
-                    <DataGridTextColumn FontSize="16" Header="CheckoutDate" Width="0.4*" Binding="{Binding CheckoutDate, StringFormat='dd/MM/yyyy HH:mm'}"/>
+                    <DataGridTextColumn FontSize="16" Header="PethotelName" Width="0.3*" Binding="{Binding Pethotel.PethotelName}"/>
+                    <DataGridTextColumn FontSize="16" Header="BookingDate" Width="0.2*" Binding="{Binding BookingDate, StringFormat='dd/MM/yyyy HH:mm'}"/>
+                    <DataGridTextColumn FontSize="16" Header="CheckoutDate" Width="0.2*" Binding="{Binding CheckoutDate, StringFormat='dd/MM/yyyy HH:mm'}"/>
                     <DataGridTextColumn FontSize="16" Header="ServiceDetails" Width="Auto" Binding="{Binding ServiceDetails}"/>
-                    <DataGridTextColumn FontSize="16" Header="Status" Width="Auto" Binding="{Binding Status}"/>
+                    <DataGridTextColumn FontSize="16" Header="Status" Width="0.1*" Binding="{Binding Status}"/>
+                    <DataGridTextColumn FontSize="16" Header="Price" Width="0.1*" Binding="{Binding Price, StringFormat={}{0:N0}}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
@@ -122,12 +123,12 @@
                 <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Row="0" Grid.Column="0" Content="ADD" FontSize="18" Command="{Binding AddCommand}" Background="#188754" Foreground="White" FontWeight="Bold" Margin="55 10 55 10"/>
+            <!-- <Button Grid.Row="0" Grid.Column="0" Content="ADD" FontSize="18" Command="{Binding AddCommand}" Background="#188754" Foreground="White" FontWeight="Bold" Margin="55 10 55 10"/> -->
             <Button Grid.Row="0" Grid.Column="1" Content="UPDATE" FontSize="18" Command="{Binding UpdateCommand}" Background="#fec107" Foreground="Black" FontWeight="Bold" Margin="55 10 55 10"/>
             <Button Grid.Row="0" Grid.Column="2" Content="DELETE" FontSize="18" Command="{Binding DeleteCommand}" Background="#dc3546" Foreground="White" FontWeight="Bold" Margin="55 10 55 10"/>
-            <Button Grid.Row="1" Grid.Column="0" Content="RESET" FontSize="18" Command="{Binding ResetCommand}" Background="#0d6efd" Foreground="White" FontWeight="Bold" Margin="55 10 55 10"/>
-            <Button Grid.Row="1" Grid.Column="1" Content="SEARCH" FontSize="18" Command="{Binding SearchCommand}" Foreground="Black" FontWeight="Bold" Margin="55 10 55 10"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="380 10 45 10" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+            <Button Grid.Row="0" Grid.Column="0" Content="RESET" FontSize="18" Command="{Binding ResetCommand}" Background="#0d6efd" Foreground="White" FontWeight="Bold" Margin="55 10 55 10"/>
+            <Button Grid.Row="1" Grid.Column="0" Content="SEARCH" FontSize="18" Command="{Binding SearchCommand}" Foreground="Black" FontWeight="Bold" Margin="55 10 55 10"/>
+            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="380 10 55 10" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                      TextAlignment="Left" VerticalContentAlignment="Center" FontSize="18"/>
         </Grid>
     </Grid>
