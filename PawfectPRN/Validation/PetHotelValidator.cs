@@ -26,14 +26,15 @@ namespace PawfectPRN.Validation
                 return false;
             }
 
-            // Kiểm tra trùng lặp tên khách sạn
-            if (context.PetHotels.Any(p => p.PethotelName.ToLower() == hotel.PethotelName.ToLower()))
+            // Kiểm tra trùng lặp tên khách sạn, nhưng bỏ qua khách sạn hiện tại
+            if (context.PetHotels.Any(p => p.PethotelName.ToLower() == hotel.PethotelName.ToLower() && p.PethotelId != hotel.PethotelId))
             {
                 errorMessage = "Tên khách sạn đã tồn tại! Vui lòng chọn tên khác.";
                 return false;
             }
 
-           // Kiểm tra Price hợp lệ (phải là số và lớn hơn 0)
+
+            // Kiểm tra Price hợp lệ (phải là số và lớn hơn 0)
             if (hotel.Price <= 0)
             {
                 errorMessage = "Giá phải lớn hơn 0.";
