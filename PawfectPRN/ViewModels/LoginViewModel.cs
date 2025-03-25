@@ -9,6 +9,7 @@ using PawfectPRN.Views.Admin;
 using PawfectPRN.Views.Customer;
 using FirstCode.Helper;
 using PawfectPRN.Views.Staff;
+using PawfectPRN.Validation;
 
 namespace PawfectPRN.ViewModels
 {
@@ -56,15 +57,16 @@ namespace PawfectPRN.ViewModels
 
         public void Login(object obj)
         {
-            if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
+            string validationMessage = LoginValidator.Validate(Username, Password);
+            if (validationMessage != null)
             {
-                MessageBox.Show("Please enter both email and password.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show(validationMessage, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
             using (var context = new PawfectPrnContext())
             {
-                string hashedPassword = HashPassword(_password); // Hash password before comparison
+                string hashedPassword = HashPassword(_password); 
 
                 var user = context.Accounts.FirstOrDefault(u => u.Email == _username && u.Password == hashedPassword);
                 if (user != null)

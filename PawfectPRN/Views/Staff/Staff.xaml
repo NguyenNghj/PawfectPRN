@@ -16,7 +16,7 @@
         <!-- Header -->
         <Menu Grid.Row="0" Background="#FFF2DF" FontSize="15">
             <!-- MenuItem Profile -->
-            <MenuItem x:Name="Profile" Height="77" Width="200" Foreground="#FFF2DF">
+            <MenuItem x:Name="Profile" Height="77" Width="200" Foreground="#FFF2DF" Click="Profile_Click">
                 <MenuItem.Header>
                     <TextBlock Text="Profile" FontWeight="Bold"/>
                 </MenuItem.Header>

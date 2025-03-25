@@ -169,7 +169,7 @@ public class CustomerBookingViewModel : BaseViewModel
                 BookingDate = bookingDate,
                 CheckoutDate = TextboxItem.CheckoutDate.Value,
                 ServiceDetails = TextboxItem.ServiceDetails,
-                Status = "Pending",
+                Status = "pending",
                 Price = calculatedPrice
             };
 
@@ -189,6 +189,12 @@ public class CustomerBookingViewModel : BaseViewModel
 
     private void Update(object obj)
     {
+        if (SelectedItem == null || SelectedItem.Status != "pending")
+        {
+            MessageBox.Show("Only bookings with 'pending' status can be updated.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
+
         using (var context = new PawfectPrnContext())
         {
             var validator = new CustomerBookingValidator();
@@ -213,7 +219,7 @@ public class CustomerBookingViewModel : BaseViewModel
                 bookingToUpdate.BookingDate = bookingDate;
                 bookingToUpdate.CheckoutDate = TextboxItem.CheckoutDate.Value;
                 bookingToUpdate.ServiceDetails = TextboxItem.ServiceDetails;
-                bookingToUpdate.Status = TextboxItem.Status ?? "Pending";
+                bookingToUpdate.Status = TextboxItem.Status ?? "pending";
                 bookingToUpdate.Price = calculatedPrice;
 
                 context.SaveChanges();
@@ -231,10 +237,13 @@ public class CustomerBookingViewModel : BaseViewModel
             }
         }
     }
-
     private void Delete(object obj)
     {
-        if (SelectedItem == null) return;
+        if (SelectedItem == null || SelectedItem.Status != "pending")
+        {
+            MessageBox.Show("Only bookings with 'pending' status can be deleted.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
 
         using (var context = new PawfectPrnContext())
         {
