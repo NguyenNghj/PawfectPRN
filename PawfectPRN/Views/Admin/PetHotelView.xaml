@@ -1,0 +1,104 @@
+﻿<Page x:Class="PawfectPRN.Views.Admin.PetHotelView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PawfectPRN.Views.Admin"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="1200"
+      Title="PetHotelView">
+
+    <Grid>
+        <!-- Định nghĩa 3 hàng: Input Fields, DataGrid và Button -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"/>
+            <!-- Nhóm Input Fields -->
+            <RowDefinition Height="6.5*"/>
+            <!-- Nhóm DataGrid hiển thị danh sách -->
+            <RowDefinition Height="2.5*"/>
+            <!-- Nhóm Button -->
+        </Grid.RowDefinitions>
+
+        <!-- Nhóm Input Fields -->
+        <Grid Grid.Row="0" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Hàng 0: Hiển thị ID và Tên -->
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="ID:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding TextBoxItem.PethotelId, Mode=TwoWay}" 
+              IsReadOnly="True" Margin="5"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="Name:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding TextBoxItem.PethotelName, Mode=TwoWay}" Margin="5"/>
+
+            <!-- Hàng 1: Hiển thị Size và Price -->
+            
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Size:" VerticalAlignment="Center" Margin="5"/>
+
+            <ComboBox Grid.Row="1" Grid.Column="1" 
+          ItemsSource="{Binding SizeOptions}" 
+          SelectedItem="{Binding TextBoxItem.Size, Mode=TwoWay}" 
+          Margin="5"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="Price:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding TextBoxItem.Price, Mode=TwoWay}" Margin="5"/>
+
+            <!-- Hàng 2: Hiển thị trạng thái Availability -->
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Available:" VerticalAlignment="Center" Margin="5"/>
+            <CheckBox Grid.Row="2" Grid.Column="1" IsChecked="{Binding TextBoxItem.AvailabilityStatus, Mode=TwoWay}" 
+               VerticalAlignment="Center" Margin="5"/>
+        </Grid>
+
+        <!-- Nhóm DataGrid hiển thị danh sách khách sạn -->
+        <Grid Grid.Row="1" Background="Red">
+            <DataGrid x:Name="dataGrid_PetHotel" ItemsSource="{Binding petHotels}" 
+               SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}"
+               AutoGenerateColumns="False" Margin="5"
+               CanUserAddRows="False" IsReadOnly="True" 
+               RowHeight="27" FontSize="13" SelectionMode="Single"
+               AlternatingRowBackground="LightGray" GridLinesVisibility="Horizontal"
+               BorderThickness="1">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Width="0.5*" Binding="{Binding PethotelId}"/>
+                    <DataGridTextColumn Header="Name" Width="*" Binding="{Binding PethotelName}"/>
+                    <DataGridTextColumn Header="Size" Width="*" Binding="{Binding Size}"/>
+                    <DataGridTextColumn Header="Price" Width="*" Binding="{Binding Price}"/>
+                    <DataGridCheckBoxColumn Header="Available" Width="0.5*" Binding="{Binding AvailabilityStatus}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <!-- Nhóm Button thao tác -->
+        <!-- Nhóm Button -->
+        <Grid Grid.Row="3" Grid.RowSpan="1" Background="#8C6E63">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0" Content="ADD" FontSize="18" Command="{Binding AddCommand}" Background="#188754" Foreground="White" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <Button Grid.Row="0" Grid.Column="1" Content="UPDATE" FontSize="18" Command="{Binding UpdateCommand}" Background="#fec107" Foreground="Black" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <Button Grid.Row="0" Grid.Column="2" Content="DELETE" FontSize="18" Command="{Binding DeleteCommand}" Background="#dc3546" Foreground="White" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <Button Grid.Row="1" Grid.Column="0" Content="RESET" FontSize="18" Command="{Binding NewCommand}" Background="#0d6efd" Foreground="White" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <Button Grid.Row="1" Grid.Column="1" Content="SEARCH" FontSize="18" Command="{Binding SearchCommand}"  Foreground="Black" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="380 10 45 10" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+             TextAlignment="Left" VerticalContentAlignment="Center" FontSize="18">
+            </TextBox>
+        </Grid>
+    </Grid>
+</Page>
