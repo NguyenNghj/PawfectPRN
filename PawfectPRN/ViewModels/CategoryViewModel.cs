@@ -11,7 +11,7 @@ using FirstCode.Helper;
 using FirstCode.ViewModels;
 using PawfectPRN.Models;
 using Microsoft.EntityFrameworkCore;
-using PawfectPRN.Validation; // Thêm namespace của Validation
+using PawfectPRN.Validation; // Add namespace for Validation
 
 namespace PawfectPRN.ViewModels
 {
@@ -40,12 +40,12 @@ namespace PawfectPRN.ViewModels
         {
             if (SelectedItem == null)
             {
-                MessageBox.Show("Vui lòng chọn danh mục để xóa!");
+                MessageBox.Show("Please select a category to delete!");
                 return;
             }
 
-            var result = MessageBox.Show("Bạn có chắc chắn muốn xóa danh mục này? Nếu xóa, các sản phẩm liên quan có thể bị ảnh hưởng.",
-                "Xác nhận xóa", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            var result = MessageBox.Show("Are you sure you want to delete this category? Deleting it may affect related products.",
+                "Delete Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
             if (result == MessageBoxResult.Yes)
             {
@@ -56,15 +56,14 @@ namespace PawfectPRN.ViewModels
                     {
                         if (context.Products.Any(p => p.CategoryId == category.CategoryId))
                         {
-                            MessageBox.Show("Không thể xóa danh mục này vì có sản phẩm liên quan!");
+                            MessageBox.Show("Cannot delete this category because it is associated with products!");
                             return;
                         }
 
                         context.Categories.Remove(category);
                         context.SaveChanges();
-                        MessageBox.Show("Xóa danh mục thành công!");
+                        MessageBox.Show("Category deleted successfully!");
                         LoadCategories();
-
                     }
                 }
             }
@@ -104,7 +103,7 @@ namespace PawfectPRN.ViewModels
                 TextBoxItem = new Category();
             }
 
-            // Validation sử dụng CategoryValidator từ namespace mới
+            // Validation using CategoryValidator from the new namespace
             if (!CategoryValidator.ValidateCategoryName(TextBoxItem.CategoryName, out string errorMessage))
             {
                 MessageBox.Show(errorMessage);
@@ -115,7 +114,7 @@ namespace PawfectPRN.ViewModels
             {
                 if (context.Categories.Any(c => c.CategoryName.ToLower() == TextBoxItem.CategoryName.ToLower()))
                 {
-                    MessageBox.Show("Tên danh mục đã tồn tại! Vui lòng chọn tên khác.");
+                    MessageBox.Show("Category name already exists! Please choose a different name.");
                     return;
                 }
 
@@ -126,7 +125,7 @@ namespace PawfectPRN.ViewModels
 
                 context.Categories.Add(newCategory);
                 context.SaveChanges();
-                MessageBox.Show("Thêm danh mục thành công!");
+                MessageBox.Show("Category added successfully!");
                 LoadCategories();
             }
         }
@@ -137,17 +136,17 @@ namespace PawfectPRN.ViewModels
             {
                 if (SelectedItem == null)
                 {
-                    MessageBox.Show("Vui lòng chọn danh mục để cập nhật!");
+                    MessageBox.Show("Please select a category to update!");
                     return;
                 }
 
                 if (TextBoxItem == null)
                 {
-                    MessageBox.Show("Lỗi: TextBoxItem chưa được khởi tạo!");
+                    MessageBox.Show("Error: TextBoxItem has not been initialized!");
                     return;
                 }
 
-                // Validation sử dụng CategoryValidator từ namespace mới
+                // Validation using CategoryValidator from the new namespace
                 if (!CategoryValidator.ValidateCategoryName(TextBoxItem.CategoryName, out string errorMessage))
                 {
                     MessageBox.Show(errorMessage);
@@ -161,24 +160,24 @@ namespace PawfectPRN.ViewModels
                     {
                         if (context.Categories.Any(c => c.CategoryName.ToLower() == TextBoxItem.CategoryName.ToLower() && c.CategoryId != SelectedItem.CategoryId))
                         {
-                            MessageBox.Show("Tên danh mục đã tồn tại! Vui lòng chọn tên khác.");
+                            MessageBox.Show("Category name already exists! Please choose a different name.");
                             return;
                         }
 
                         existingCategory.CategoryName = TextBoxItem.CategoryName;
                         context.SaveChanges();
-                        MessageBox.Show("Cập nhật danh mục thành công!");
+                        MessageBox.Show("Category updated successfully!");
                         LoadCategories();
                     }
                     else
                     {
-                        MessageBox.Show("Không tìm thấy danh mục để cập nhật!");
+                        MessageBox.Show("Category not found for update!");
                     }
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Lỗi: {e.Message}");
+                MessageBox.Show($"Error: {e.Message}");
             }
         }
 

@@ -9,26 +9,26 @@ namespace PawfectPRN.Validation
 {
     public static class CategoryValidator
     {
-        // Validation cho Category
+        // Validation for Category
         public static bool ValidateCategoryName(string categoryName, out string errorMessage)
         {
             errorMessage = string.Empty;
 
             if (string.IsNullOrWhiteSpace(categoryName))
             {
-                errorMessage = "Vui lòng nhập tên danh mục!";
+                errorMessage = "Please enter a category name!";
                 return false;
             }
 
             if (categoryName.Length > 50)
             {
-                errorMessage = "Tên danh mục không được vượt quá 50 ký tự!";
+                errorMessage = "Category name must not exceed 50 characters!";
                 return false;
             }
 
             if (!Regex.IsMatch(categoryName, @"^[\p{L}0-9\s]+$"))
             {
-                errorMessage = "Tên danh mục chỉ được chứa chữ cái, số và khoảng trắng!";
+                errorMessage = "Category name can only contain letters, numbers, and spaces!";
                 return false;
             }
 
