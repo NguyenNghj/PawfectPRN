@@ -1,4 +1,6 @@
 ﻿using PawfectPRN.Models;
+using PawfectPRN.ViewModels;
+using PawfectPRN.Views.Admin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +57,10 @@ namespace PawfectPRN.Views.Customer
         private void Booking_Click(object sender, RoutedEventArgs e)
         {
             MainFrame.Content = new CustomerBookingView(_account);
+        }
+        private void PetHotelCus_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new PetHotelCustomerView();
         }
     }
 

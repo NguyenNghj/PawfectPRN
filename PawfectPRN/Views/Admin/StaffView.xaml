@@ -1,0 +1,103 @@
+﻿<Page x:Class="PawfectPRN.Views.Admin.StaffView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PawfectPRN.Views.Admin"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="1200"
+      Title="StaffView">
+
+    <Grid>
+        <!-- Định nghĩa 3 hàng: Input Fields, DataGrid và Button -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"/>
+            <!-- Nhóm Input Fields -->
+            <RowDefinition Height="6.5*"/>
+            <!-- Nhóm DataGrid hiển thị danh sách -->
+            <RowDefinition Height="2.5*"/>
+            <!-- Nhóm Button -->
+        </Grid.RowDefinitions>
+
+        <!-- Nhóm Input Fields -->
+        <Grid Grid.Row="0" Background="White" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Hàng 0: Hiển thị ID và Full Name -->
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="ID:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding TextBoxItem.AccountId, Mode=TwoWay}" 
+                 IsReadOnly="True" Margin="5"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="Full Name:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding TextBoxItem.FullName, Mode=TwoWay}" Margin="5"/>
+
+            <!-- Hàng 1: Hiển thị Email và Phone -->
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Email:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding TextBoxItem.Email, Mode=TwoWay}" Margin="5"/>
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="Phone:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding TextBoxItem.PhoneNumber, Mode=TwoWay}" Margin="5"/>
+
+            <!-- Hàng 2: Hiển thị Address và Gender -->
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Address:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding TextBoxItem.Address, Mode=TwoWay}" Margin="5"/>
+            <TextBlock Grid.Row="2" Grid.Column="2" Text="Gender:" VerticalAlignment="Center" Margin="5"/>
+            <ComboBox Grid.Row="2" Grid.Column="3" 
+      ItemsSource="{Binding GenderOptions}" 
+      SelectedItem="{Binding TextBoxItem.Gender, Mode=TwoWay}" 
+      Margin="5" />
+
+        </Grid>
+
+        <!-- Nhóm DataGrid hiển thị danh sách Staff -->
+        <Grid Grid.Row="1" Background="red" Margin="5">
+            <DataGrid x:Name="dataGrid_Staff" ItemsSource="{Binding Staffs}" 
+                  SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}"
+                  AutoGenerateColumns="False" Margin="5"
+                  CanUserAddRows="False" IsReadOnly="True" 
+                  RowHeight="27" FontSize="13" SelectionMode="Single"
+                  AlternatingRowBackground="LightGray" GridLinesVisibility="Horizontal"
+                  BorderThickness="1">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Width="0.5*" Binding="{Binding AccountId}"/>
+                    <DataGridTextColumn Header="Full Name" Width="*" Binding="{Binding FullName}"/>
+                    <DataGridTextColumn Header="Email" Width="*" Binding="{Binding Email}"/>
+                    <DataGridTextColumn Header="Phone" Width="*" Binding="{Binding PhoneNumber}"/>
+                    <DataGridTextColumn Header="Gender" Width="0.5*" Binding="{Binding Gender}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <!-- Nhóm Button thao tác -->
+        <!-- Nhóm Button -->
+        <Grid Grid.Row="3" Grid.RowSpan="1" Background="#8C6E63">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0" Content="ADD" FontSize="18" Command="{Binding AddCommand}" Background="#188754" Foreground="White" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <Button Grid.Row="0" Grid.Column="1" Content="UPDATE" FontSize="18" Command="{Binding UpdateCommand}" Background="#fec107" Foreground="Black" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <Button Grid.Row="0" Grid.Column="2" Content="DELETE" FontSize="18" Command="{Binding DeleteCommand}" Background="#dc3546" Foreground="White" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <Button Grid.Row="1" Grid.Column="0" Content="RESET" FontSize="18" Command="{Binding NewCommand}" Background="#0d6efd" Foreground="White" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <Button Grid.Row="1" Grid.Column="1" Content="SEARCH" FontSize="18" Command="{Binding SearchCommand}"  Foreground="Black" FontWeight="Bold" Margin="55 10 55 10"></Button>
+            <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="380 10 45 10" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+             TextAlignment="Left" VerticalContentAlignment="Center" FontSize="18">
+            </TextBox>
+        </Grid>
+    </Grid>
+</Page>
