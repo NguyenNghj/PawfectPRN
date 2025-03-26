@@ -6,32 +6,54 @@ using System.Threading.Tasks;
 
 namespace PawfectPRN.Validation
 {
-    internal class ProfileValidator
+    namespace PawfectPRN.Validation
     {
-        public static bool ValidatePasswordChange(string oldPassword, string newPassword, string confirmNewPassword, string actualHashedPassword, Func<string, string> hashFunction, out string errorMessage)
+        internal class ProfileValidator
         {
-            errorMessage = string.Empty;
-
-            if (string.IsNullOrWhiteSpace(oldPassword) || string.IsNullOrWhiteSpace(newPassword) || string.IsNullOrWhiteSpace(confirmNewPassword))
+            public static bool ValidatePasswordChange(string oldPassword, string newPassword, string confirmNewPassword, string actualHashedPassword, Func<string, string> hashFunction, out string errorMessage)
             {
-                errorMessage = "Please fill in all the required fields!";
-                return false;
+                errorMessage = string.Empty;
+
+                if (string.IsNullOrWhiteSpace(oldPassword) || string.IsNullOrWhiteSpace(newPassword) || string.IsNullOrWhiteSpace(confirmNewPassword))
+                {
+                    errorMessage = "Please fill in all the required fields!";
+                    return false;
+                }
+
+                if (newPassword != confirmNewPassword)
+                {
+                    errorMessage = "New password and confirmation do not match!";
+                    return false;
+                }
+
+                string hashedOldPassword = hashFunction(oldPassword);
+                if (hashedOldPassword != actualHashedPassword)
+                {
+                    errorMessage = "Incorrect old password!";
+                    return false;
+                }
+
+                return true;
             }
 
-            if (newPassword != confirmNewPassword)
+            public static bool ValidateAddress(string address, out string errorMessage)
             {
-                errorMessage = "New password and confirmation do not match!";
-                return false;
-            }
+                errorMessage = string.Empty;
 
-            string hashedOldPassword = hashFunction(oldPassword);
-            if (hashedOldPassword != actualHashedPassword)
-            {
-                errorMessage = "Incorrect old password!";
-                return false;
-            }
+                if (string.IsNullOrWhiteSpace(address))
+                {
+                    errorMessage = "Address cannot be empty!";
+                    return false;
+                }
 
-            return true;
+                if (!address.Any(char.IsLetter))
+                {
+                    errorMessage = "Address must contain at least one letter!";
+                    return false;
+                }
+
+                return true;
+            }
         }
     }
 }
