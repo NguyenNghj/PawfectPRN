@@ -26,5 +26,10 @@ namespace PawfectPRN.Views.Staff
             InitializeComponent();
             this.DataContext = new StaffBookingViewModel();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

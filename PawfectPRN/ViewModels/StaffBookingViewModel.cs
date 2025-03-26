@@ -12,6 +12,9 @@ using FirstCode.ViewModels;
 using PawfectPRN.Models;
 using Microsoft.EntityFrameworkCore;
 using PawfectPRN.Validation;
+using PawfectPRN.Views.Customer;
+using System.Text.Json;
+using System.IO;
 
 namespace PawfectPRN.ViewModels
 {
@@ -27,6 +30,7 @@ namespace PawfectPRN.ViewModels
         public ICommand SearchCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
         public ICommand ResetCommand { get; set; }
+        //public ICommand ExportCommand { get; set; }
 
         public StaffBookingViewModel()
         {
@@ -41,6 +45,7 @@ namespace PawfectPRN.ViewModels
             SearchCommand = new RelayCommand(Search);
             DeleteCommand = new RelayCommand(Delete);
             ResetCommand = new RelayCommand(Reset);
+            //ExportCommand = new RelayCommand(Export);
         }
 
         private void Add(object obj)
@@ -406,5 +411,24 @@ namespace PawfectPRN.ViewModels
                 OnPropertyChanged(nameof(SearchText));
             }
         }
+
+        //private void Export(object obj)
+        //{
+        //    string filename = "bookinglist.json";
+        //    StoreToFile(filename);
+        //}
+
+        //public void StoreToFile(string filename)
+        //{
+        //    try
+        //    {
+        //        string jsonData = System.Text.Json.JsonSerializer.Serialize(bookings, new JsonSerializerOptions { WriteIndented = true });
+        //        File.WriteAllText(filename, jsonData);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception("Error writing to file: " + ex.Message);
+        //    }
+        //}
     }
 }

@@ -83,12 +83,13 @@
 
             <TextBox Grid.Row="1" Grid.Column="0" Margin="5 0 10 5" Text="{Binding TextBoxItem.BookingId, Mode=TwoWay}" IsReadOnly="True"
                      TextAlignment="Left" VerticalContentAlignment="Center" FontSize="14"/>
-            <ComboBox Grid.Row="1" Grid.Column="1" Margin="0 0 10 5" VerticalContentAlignment="Center" FontSize="14"
+            <ComboBox Grid.Row="1" Grid.Column="1" Margin="0 0 10 5" VerticalContentAlignment="Center" FontSize="14" 
                       ItemsSource="{Binding accounts}" 
                       DisplayMemberPath="FullName"
                       SelectedValuePath="AccountId" 
                       SelectedValue="{Binding TextBoxItem.AccountId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding SelectedAccount, Mode=TwoWay}"/>
+                      SelectedItem="{Binding SelectedAccount, Mode=TwoWay}"
+                      IsEnabled="False"/>
             <ComboBox Grid.Row="1" Grid.Column="2" Margin="0 0 10 5" VerticalContentAlignment="Center" FontSize="14"
                       ItemsSource="{Binding petHotels}" 
                       DisplayMemberPath="PethotelName"
@@ -130,6 +131,7 @@
             <Button Grid.Row="1" Grid.Column="0" Content="SEARCH" FontSize="18" Command="{Binding SearchCommand}" Foreground="Black" FontWeight="Bold" Margin="55 10 55 10"/>
             <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="380 10 55 10" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                      TextAlignment="Left" VerticalContentAlignment="Center" FontSize="18"/>
+            <!-- <Button Grid.Row="1" Grid.Column="2" Content="EXPORT" FontSize="18" Command="{Binding ExportCommand}" Foreground="Black" FontWeight="Bold" Margin="55 10 55 10" Click="Button_Click"/> -->
         </Grid>
     </Grid>
 </Page>
