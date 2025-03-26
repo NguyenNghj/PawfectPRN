@@ -2,6 +2,7 @@
 using FirstCode.ViewModels;
 using Newtonsoft.Json;
 using PawfectPRN.Models;
+using PawfectPRN.Validation;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -147,32 +148,19 @@ namespace PE_180897_NguyenTriNghi.ViewBaseModel
         {
             if (selectitem == null) return;
 
-            if (string.IsNullOrWhiteSpace(OldPassword) || string.IsNullOrWhiteSpace(NewPassword) || string.IsNullOrWhiteSpace(ConfirmNewPassword))
-            {
-                MessageBox.Show("Please fill in all the required fields!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
-            if (NewPassword != ConfirmNewPassword)
-            {
-                MessageBox.Show("New password and confirmation do not match!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-
             using (var context = new PawfectPrnContext())
             {
                 var accountToChangePassword = context.Accounts.Find(selectitem.AccountId);
                 if (accountToChangePassword != null)
                 {
-                    string hashedOldPassword = HashPassword(OldPassword);
-                    if (accountToChangePassword.Password != hashedOldPassword)
+                    string errorMessage;
+                    if (!ProfileValidator.ValidatePasswordChange(OldPassword, NewPassword, ConfirmNewPassword, accountToChangePassword.Password, HashPassword, out errorMessage))
                     {
-                        MessageBox.Show("Incorrect old password!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        MessageBox.Show(errorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                         return;
                     }
 
-                    string hashedNewPassword = HashPassword(NewPassword);
-                    accountToChangePassword.Password = hashedNewPassword;
+                    accountToChangePassword.Password = HashPassword(NewPassword);
                     context.SaveChanges();
 
                     MessageBox.Show("Password changed successfully!", "Notification", MessageBoxButton.OK, MessageBoxImage.Information);

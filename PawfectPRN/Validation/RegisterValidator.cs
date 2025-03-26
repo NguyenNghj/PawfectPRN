@@ -40,7 +40,7 @@ namespace PawfectPRN.Validation
                 return "Please select your gender.";
             }
 
-            return null; // No validation errors
+            return null; 
         }
 
         private static bool ValidateEmail(string email)
