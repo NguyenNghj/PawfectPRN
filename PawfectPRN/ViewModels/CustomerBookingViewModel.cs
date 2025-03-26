@@ -169,7 +169,7 @@ public class CustomerBookingViewModel : BaseViewModel
                 BookingDate = bookingDate,
                 CheckoutDate = TextboxItem.CheckoutDate.Value,
                 ServiceDetails = TextboxItem.ServiceDetails,
-                Status = "pending",
+                Status = "Pending",
                 Price = calculatedPrice
             };
 
@@ -189,9 +189,9 @@ public class CustomerBookingViewModel : BaseViewModel
 
     private void Update(object obj)
     {
-        if (SelectedItem == null || SelectedItem.Status != "pending")
+        if (SelectedItem == null || SelectedItem.Status != "Pending")
         {
-            MessageBox.Show("Only bookings with 'pending' status can be updated.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show("Only bookings with 'Pending' status can be updated.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
         }
 
@@ -219,7 +219,7 @@ public class CustomerBookingViewModel : BaseViewModel
                 bookingToUpdate.BookingDate = bookingDate;
                 bookingToUpdate.CheckoutDate = TextboxItem.CheckoutDate.Value;
                 bookingToUpdate.ServiceDetails = TextboxItem.ServiceDetails;
-                bookingToUpdate.Status = TextboxItem.Status ?? "pending";
+                bookingToUpdate.Status = TextboxItem.Status ?? "Pending";
                 bookingToUpdate.Price = calculatedPrice;
 
                 context.SaveChanges();
@@ -239,7 +239,7 @@ public class CustomerBookingViewModel : BaseViewModel
     }
     private void Delete(object obj)
     {
-        if (SelectedItem == null || SelectedItem.Status != "pending")
+        if (SelectedItem == null || SelectedItem.Status != "Pending")
         {
             MessageBox.Show("Only bookings with 'pending' status can be deleted.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             return;
