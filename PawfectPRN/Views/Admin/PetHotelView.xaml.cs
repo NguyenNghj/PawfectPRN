@@ -16,9 +16,6 @@ using PawfectPRN.ViewModels;
 
 namespace PawfectPRN.Views.Admin
 {
-    /// <summary>
-    /// Interaction logic for PetHotelView.xaml
-    /// </summary>
     public partial class PetHotelView : Page
     {
         public PetHotelView()

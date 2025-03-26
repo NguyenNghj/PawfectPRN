@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace PawfectPRN.Views.Customer
 {
-    /// <summary>
-    /// Interaction logic for ProfileView.xaml
-    /// </summary>
     public partial class ProfileView : Page
     {
         public ProfileView(Account account)

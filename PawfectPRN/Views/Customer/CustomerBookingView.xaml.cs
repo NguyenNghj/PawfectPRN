@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace PawfectPRN.Views.Customer
 {
-    /// <summary>
-    /// Interaction logic for CustomerBookingView.xaml
-    /// </summary>
     public partial class CustomerBookingView : Page
     {
         public CustomerBookingView(Account account)

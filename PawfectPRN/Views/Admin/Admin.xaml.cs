@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace PawfectPRN.Views.Admin
 {
-    /// <summary>
-    /// Interaction logic for Admin.xaml
-    /// </summary>
     public partial class Admin : Window
     {
         public Admin()
@@ -47,7 +44,7 @@ namespace PawfectPRN.Views.Admin
 
         private void Logout_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            // Hiển thị hộp thoại xác nhận logout
+
             MessageBoxResult result = MessageBox.Show("Are you sure you want to logout?",
                                                       "Logout Confirmation",
                                                       MessageBoxButton.YesNo,
@@ -55,11 +52,8 @@ namespace PawfectPRN.Views.Admin
 
             if (result == MessageBoxResult.Yes)
             {
-                // Điều hướng về màn hình đăng nhập
                 Login loginWindow = new Login();
                 loginWindow.Show();
-
-                // Đóng cửa sổ hiện tại
                 this.Close();
             }
         }

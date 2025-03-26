@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace PawfectPRN.Views.Customer
 {
-    /// <summary>
-    /// Interaction logic for Customer.xaml
-    /// </summary>
     public partial class Customer : Window
     {
         private Account _account;
@@ -37,7 +34,6 @@ namespace PawfectPRN.Views.Customer
         }
         private void Logout_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            // Hiển thị hộp thoại xác nhận logout
             MessageBoxResult result = MessageBox.Show("Are you sure you want to logout?",
                                                       "Logout Confirmation",
                                                       MessageBoxButton.YesNo,
@@ -45,11 +41,8 @@ namespace PawfectPRN.Views.Customer
 
             if (result == MessageBoxResult.Yes)
             {
-                // Điều hướng về màn hình đăng nhập
                 Login loginWindow = new Login();
                 loginWindow.Show();
-
-                // Đóng cửa sổ hiện tại
                 this.Close();
             }
         }

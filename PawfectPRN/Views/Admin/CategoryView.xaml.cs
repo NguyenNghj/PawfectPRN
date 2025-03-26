@@ -16,9 +16,6 @@ using PawfectPRN.ViewModels;
 
 namespace PawfectPRN.Views.Admin
 {
-    /// <summary>
-    /// Interaction logic for CategoryView.xaml
-    /// </summary>
     public partial class CategoryView : Page
     {
         public CategoryView()

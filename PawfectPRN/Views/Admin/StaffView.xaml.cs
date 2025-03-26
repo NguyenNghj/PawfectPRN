@@ -16,9 +16,6 @@ using PawfectPRN.ViewModels;
 
 namespace PawfectPRN.Views.Admin
 {
-    /// <summary>
-    /// Interaction logic for StaffView.xaml
-    /// </summary>
     public partial class StaffView : Page
     {
         public StaffView()
