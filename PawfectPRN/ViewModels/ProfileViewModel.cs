@@ -3,6 +3,7 @@ using FirstCode.ViewModels;
 using Newtonsoft.Json;
 using PawfectPRN.Models;
 using PawfectPRN.Validation;
+using PawfectPRN.Validation.PawfectPRN.Validation;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -125,6 +126,14 @@ namespace PE_180897_NguyenTriNghi.ViewBaseModel
                 var accountToUpdate = context.Accounts.Find(selectitem.AccountId);
                 if (accountToUpdate != null)
                 {
+                    // Validate address
+                    string addressErrorMessage;
+                    if (!ProfileValidator.ValidateAddress(textboxitem.Address, out addressErrorMessage))
+                    {
+                        MessageBox.Show(addressErrorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
+
                     accountToUpdate.FullName = CapitalizeFirstLetter(textboxitem.FullName);
                     accountToUpdate.Email = textboxitem.Email;
                     accountToUpdate.PhoneNumber = textboxitem.PhoneNumber;
@@ -143,7 +152,6 @@ namespace PE_180897_NguyenTriNghi.ViewBaseModel
                 }
             }
         }
-
         private void ChangePassword(object obj)
         {
             if (selectitem == null) return;

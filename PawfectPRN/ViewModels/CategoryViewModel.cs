@@ -11,8 +11,7 @@ using FirstCode.Helper;
 using FirstCode.ViewModels;
 using PawfectPRN.Models;
 using Microsoft.EntityFrameworkCore;
-using PawfectPRN.Validation; // Add namespace for Validation
-
+using PawfectPRN.Validation;
 namespace PawfectPRN.ViewModels
 {
     public class CategoryViewModel : BaseViewModel

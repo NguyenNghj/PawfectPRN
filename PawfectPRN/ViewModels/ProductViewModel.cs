@@ -11,7 +11,7 @@ using FirstCode.Helper;
 using FirstCode.ViewModels;
 using PawfectPRN.Models;
 using Microsoft.EntityFrameworkCore;
-using PawfectPRN.Validation; // Add namespace for Validation
+using PawfectPRN.Validation;
 
 namespace PawfectPRN.ViewModels
 {
@@ -102,7 +102,7 @@ namespace PawfectPRN.ViewModels
                 TextBoxItem = new Product();
             }
 
-            // Validation using ProductValidator from the new namespace
+    
             using (var context = new PawfectPrnContext())
             {
                 if (!ProductValidator.ValidateProduct(TextBoxItem, out string errorMessage, context))
@@ -111,7 +111,6 @@ namespace PawfectPRN.ViewModels
                     return;
                 }
 
-                // Check for duplicate Name
                 if (context.Products.Any(p => p.Name.ToLower() == TextBoxItem.Name.ToLower()))
                 {
                     MessageBox.Show("Product name already exists! Please choose a different name.");
@@ -150,7 +149,7 @@ namespace PawfectPRN.ViewModels
                     return;
                 }
 
-                // Validation using ProductValidator from the new namespace
+          
                 using (var context = new PawfectPrnContext())
                 {
                     if (!ProductValidator.ValidateProduct(TextBoxItem, out string errorMessage, context))
@@ -162,7 +161,7 @@ namespace PawfectPRN.ViewModels
                     var existingProduct = context.Products.FirstOrDefault(p => p.ProductId == SelectedItem.ProductId);
                     if (existingProduct != null)
                     {
-                        // Check for duplicate Name (excluding itself)
+               
                         if (context.Products.Any(p => p.Name.ToLower() == TextBoxItem.Name.ToLower() && p.ProductId != SelectedItem.ProductId))
                         {
                             MessageBox.Show("Product name already exists! Please choose a different name.");

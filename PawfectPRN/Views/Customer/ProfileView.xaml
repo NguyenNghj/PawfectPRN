@@ -155,11 +155,11 @@
 
             <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding textboxitem.PhoneNumber, Mode=TwoWay}" 
     Height="45" Width="400" HorizontalAlignment="Center" 
-    Style="{StaticResource RoundedTextBoxStyle}" FontSize="16" CharacterCasing="Upper"/>
+    Style="{StaticResource RoundedTextBoxStyle}" FontSize="16"/>
 
             <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding textboxitem.Address, Mode=TwoWay}" 
     Height="45" Width="400" HorizontalAlignment="Center" 
-    Style="{StaticResource RoundedTextBoxStyle}" FontSize="16" CharacterCasing="Upper"/>
+    Style="{StaticResource RoundedTextBoxStyle}" FontSize="16"/>
 
             <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding textboxitem.Gender, Mode=TwoWay}"
     Height="45" Width="400" HorizontalAlignment="Center" 

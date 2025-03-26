@@ -150,6 +150,14 @@ public class CustomerBookingViewModel : BaseViewModel
             var validator = new CustomerBookingValidator();
             var petHotel = context.PetHotels.Find(TextboxItem.PethotelId);
 
+
+            if (petHotel == null || petHotel.AvailabilityStatus != true)
+            {
+                MessageBox.Show("The selected pet hotel is not available.", "Error",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             var (isValid, errorMessage) = validator.ValidateAdd(TextboxItem, petHotel);
             if (!isValid)
             {
@@ -179,7 +187,12 @@ public class CustomerBookingViewModel : BaseViewModel
 
             PethotelBookings.Add(newBooking);
             AllBookings.Add(newBooking);
-            TextboxItem = new PethotelBooking { AccountId = Account.AccountId, BookingDate = DateTime.Now, CheckoutDate = DateTime.Now.AddDays(1) };
+            TextboxItem = new PethotelBooking
+            {
+                AccountId = Account.AccountId,
+                BookingDate = DateTime.Now,
+                CheckoutDate = DateTime.Now.AddDays(1)
+            };
             OnPropertyChanged(nameof(PethotelBookings));
             OnPropertyChanged(nameof(TextboxItem));
             MessageBox.Show("Booking created successfully!", "Success",
@@ -199,6 +212,13 @@ public class CustomerBookingViewModel : BaseViewModel
         {
             var validator = new CustomerBookingValidator();
             var petHotel = context.PetHotels.Find(TextboxItem.PethotelId);
+
+            if (petHotel == null || petHotel.AvailabilityStatus != true)
+            {
+                MessageBox.Show("The selected pet hotel is not available.", "Error",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
             var (isValid, errorMessage) = validator.ValidateUpdate(SelectedItem, TextboxItem, petHotel);
             if (!isValid)
