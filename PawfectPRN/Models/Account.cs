@@ -24,4 +24,5 @@ public partial class Account
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
     public virtual ICollection<PethotelBooking> PethotelBookings { get; set; } = new List<PethotelBooking>();
+
 }
