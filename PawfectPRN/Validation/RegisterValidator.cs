@@ -27,6 +27,10 @@ namespace PawfectPRN.Validation
             {
                 return "Password must be at least 6 characters long.";
             }
+            if (Regex.IsMatch(password, @"[^a-zA-Z0-9]"))
+            {
+                return "Password must not contain special characters.";
+            }
             if (string.IsNullOrWhiteSpace(confirmPassword))
             {
                 return "Please confirm your password.";
