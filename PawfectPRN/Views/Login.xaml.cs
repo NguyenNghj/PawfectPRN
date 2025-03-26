@@ -15,9 +15,6 @@ using System.Windows.Shapes;
 
 namespace PawfectPRN.Views
 {
-    /// <summary>
-    /// Interaction logic for Login.xaml
-    /// </summary>
     public partial class Login : Window
     {
         public Login()
@@ -43,7 +40,7 @@ namespace PawfectPRN.Views
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Close(); // Đóng cửa sổ hiện tại
+            this.Close();
         }
 
 

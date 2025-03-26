@@ -18,9 +18,6 @@ using System.Windows.Shapes;
 
 namespace PawfectPRN.Views.Admin
 {
-    /// <summary>
-    /// Interaction logic for ProductView.xaml
-    /// </summary>
     public partial class ProductView : Page
     {
         public ProductView()

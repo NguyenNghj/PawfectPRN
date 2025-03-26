@@ -101,7 +101,7 @@ namespace PawfectPRN.ViewModels
 
         private void CloseCurrentWindow()
         {
-            Window currentWindow = Application.Current.Windows.OfType<Window>()
+            Window? currentWindow = Application.Current.Windows.OfType<Window>()
                                       .FirstOrDefault(w => w.DataContext == this);
             currentWindow?.Close();
         }

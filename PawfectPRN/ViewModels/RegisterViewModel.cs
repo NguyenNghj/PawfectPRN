@@ -155,7 +155,7 @@ namespace PawfectPRN.ViewModels
             Login loginWindow = new Login();
             loginWindow.Show();
 
-            Window currentWindow = Application.Current.Windows.OfType<Window>()
+            Window? currentWindow = Application.Current.Windows.OfType<Window>()
                                         .FirstOrDefault(w => w.DataContext == this);
 
             currentWindow?.Close();
